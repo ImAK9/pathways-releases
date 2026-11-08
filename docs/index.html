@@ -428,8 +428,8 @@ footer p { margin: 0; }
       <svg class="logo" viewBox="0 0 1000 250" role="img" aria-label="Pathways"><use href="#pw-logo"/></svg>
       <p class="tag">You wash ashore with nothing. Not even what you knew.</p>
       <div class="ip">
-        <div><span class="lbl">Server address</span><code class="ip-addr">ak.modded.fun</code></div>
-        <button type="button" class="copy-ip" data-ip="ak.modded.fun">Copy</button>
+        <div><span class="lbl">Server address</span><code class="ip-addr">play.pathwaysmc.net</code></div>
+        <button type="button" class="copy-ip" data-ip="play.pathwaysmc.net">Copy</button>
       </div>
       <div class="ctas">
         <a class="btn btn-gold" href="#hiscores">Download the pack</a>
@@ -452,7 +452,7 @@ footer p { margin: 0; }
         <div class="txt">
           <div class="meta"><span class="cat srv">Server</span> 8 Nov 2026</div>
           <h3>The alpha server opens Friday 13 November</h3>
-          <p>The first Pathways server opens this Friday at <b>ak.modded.fun</b>. Install the pack now, so you're ready to wash
+          <p>The first Pathways server opens this Friday at <b>play.pathwaysmc.net</b>. Install the pack now, so you're ready to wash
             ashore with everyone else on day one. It's an alpha, so expect rough edges and tell us what breaks.</p>
           <a class="more-link" href="#play">Get ready ›</a>
         </div>
@@ -582,7 +582,7 @@ footer p { margin: 0; }
               <td class="num"><span class="max" id="hs-val">1,188<small id="hs-sub">All 99</small></span></td>
             </tr>
             <tr class="ghost"><td><span class="rank-n">1</span></td>
-              <td colspan="3"><span class="you">Your name here.</span> Join <b>ak.modded.fun</b> and start climbing.</td></tr>
+              <td colspan="3"><span class="you">Your name here.</span> Join <b>play.pathwaysmc.net</b> and start climbing.</td></tr>
             <tr class="faint" style="opacity:.55"><td><span class="rank-n">2</span></td><td colspan="3"><i class="bar-ph" style="width:38%"></i></td></tr>
             <tr class="faint" style="opacity:.3"><td><span class="rank-n">3</span></td><td colspan="3"><i class="bar-ph" style="width:26%"></i></td></tr>
           </tbody>
@@ -656,8 +656,8 @@ footer p { margin: 0; }
             <p>From Friday 13 November: add the server under Multiplayer, join, and wake on the island. The Wayfinder waits by his fire; the ferry takes you to the mainland when you're ready.</p>
             <div class="o-act">
               <div class="ip mini">
-                <div><code>ak.modded.fun</code></div>
-                <button type="button" class="copy-ip" data-ip="ak.modded.fun">Copy</button>
+                <div><code>play.pathwaysmc.net</code></div>
+                <button type="button" class="copy-ip" data-ip="play.pathwaysmc.net">Copy</button>
               </div>
             </div>
           </div>
@@ -789,7 +789,7 @@ footer p { margin: 0; }
 
   // is the server up? Only from opening day (Friday 13 November 2026, local time); before that the chip keeps
   // "opens Friday 13 November". (mcsrvstat.us; a hosted page can ask, a sandboxed preview can't.)
-  if (new Date() >= new Date(2026, 10, 13)) fetch("https://api.mcsrvstat.us/3/ak.modded.fun")
+  if (new Date() >= new Date(2026, 10, 13)) fetch("https://api.mcsrvstat.us/3/play.pathwaysmc.net")
     .then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(st => {
       const chip = document.getElementById("srv-chip"), t = document.getElementById("srv-text");
