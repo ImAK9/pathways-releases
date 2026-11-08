@@ -299,6 +299,74 @@ section.band { padding-block: 64px; }
 .rank-list .rank-n { font-size: 13px; color: #6f81a1; width: auto; }
 .rank-list li.more { background: transparent; box-shadow: inset 0 0 0 1px rgba(160,196,255,.14); }
 .rank-list li.more .claim { font-weight: 500; font-style: italic; color: #5d6f8d; }
+/* ---------- stations */
+.st-intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px 36px; align-items: center; margin-bottom: 24px; }
+.st-intro p { margin: 0; color: var(--muted); max-width: 62ch; }
+.tiers { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.tier-chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 10px; border-radius: 999px; background: rgba(10,19,34,.5);
+  box-shadow: inset 0 0 0 1px var(--line); font: 700 12px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--text); }
+.tier-chip i { width: 9px; height: 9px; transform: rotate(45deg); background: var(--c); box-shadow: 0 0 8px color-mix(in srgb, var(--c) 70%, transparent); }
+.tier-chip b { color: var(--muted); font-weight: 600; }
+.st-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.st { position: relative; display: grid; grid-template-rows: auto 1fr; border-radius: 12px; overflow: hidden; background: var(--navy-2);
+  box-shadow: inset 0 0 0 1px var(--line); transition: transform .2s ease, box-shadow .2s ease; }
+.st:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 55%, transparent), 0 12px 28px rgba(0,0,0,.35); }
+.st-art { aspect-ratio: 4 / 3; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(58% 52% at 50% 60%, color-mix(in srgb, var(--c) 34%, transparent), transparent 72%), linear-gradient(180deg, #16243f, #101b31); }
+.st-art img { width: 76%; height: auto; filter: drop-shadow(0 10px 12px rgba(0,0,0,.5)); transition: transform .3s ease; }
+.st:hover .st-art img { transform: scale(1.05) translateY(-2px); }
+.st-txt { padding: 12px 14px 15px; display: grid; gap: 5px; align-content: start; border-top: 1px solid color-mix(in srgb, var(--c) 30%, transparent); }
+.st-txt h3 { margin: 0; font: 700 17px/1.2 var(--display); }
+.st-txt p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.st-skill { display: inline-flex; align-items: center; gap: 6px; font: 700 11px/1 var(--display); letter-spacing: .1em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--c) 55%, #fff); }
+.st-skill canvas { width: 16px; height: 16px; image-rendering: pixelated; }
+@media (prefers-reduced-motion: reduce) { .st, .st-art img { transition: none; } .st:hover, .st:hover .st-art img { transform: none; } }
+
+/* ---------- deeds */
+.deeds-wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.6fr); gap: 22px 30px; align-items: start; }
+.deed-show { position: sticky; top: 84px; display: grid; gap: 16px; }
+.deed-show > p { margin: 0; color: var(--muted); }
+.nt-stage { display: grid; place-items: center; padding: 40px 16px 36px; border-radius: 12px; overflow: hidden;
+  background: radial-gradient(60% 70% at 50% 50%, rgba(6,10,20,.55), rgba(6,10,20,.15)), linear-gradient(180deg, rgba(10,19,34,.35), rgba(10,19,34,.7)),
+  url(img/path_forest.jpg) center 40% / cover; box-shadow: inset 0 0 0 1px var(--line); }
+.nt { display: grid; justify-items: center; gap: 3px; }
+.nt-title { padding: 3px 7px 4px; background: rgba(0,0,0,.42); font: 600 14px/1 var(--display); color: #ffcf4a; text-shadow: 0 2px 0 rgba(0,0,0,.6); }
+.nt-line { padding: 5px 10px 6px; background: rgba(0,0,0,.42); font: 700 18px/1 var(--display); color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.6); }
+.nt-line em { font-style: normal; color: #ffd24a; margin-left: 4px; }
+.deed-toast { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 10px; background: #1b1610;
+  box-shadow: inset 0 0 0 1px rgba(240,185,74,.5), 0 8px 22px rgba(0,0,0,.35); }
+.dt-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 8px; background: rgba(240,185,74,.12); box-shadow: inset 0 0 0 1px rgba(240,185,74,.35); }
+.dt-icon canvas { width: 28px; height: 28px; image-rendering: pixelated; }
+.deed-toast .dt-k { display: block; font: 700 11px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.deed-toast b { display: block; margin-top: 4px; font: 700 18px/1.2 var(--display); color: var(--gold-hi); }
+.deed-toast small { display: block; margin-top: 2px; font-size: 13.5px; color: #c9b892; }
+.deed-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.deed { display: grid; gap: 7px; align-content: start; padding: 14px 15px 15px; border-radius: 10px; background: var(--navy-2); box-shadow: inset 0 0 0 1px var(--line); }
+.deed-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.deed h3 { margin: 0; font: 700 16px/1.2 var(--display); }
+.deed-n { font: 800 20px/1 var(--display); color: var(--gold-hi); font-variant-numeric: tabular-nums; }
+.deed p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.deed-titles { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.deed-titles span { font: italic 600 12.5px/1 var(--body); color: var(--gold); padding: 5px 8px; border-radius: 6px; background: rgba(240,185,74,.08);
+  box-shadow: inset 0 0 0 1px rgba(240,185,74,.22); }
+.hidden-deed { background: repeating-linear-gradient(135deg, #17243d 0 10px, #1a2945 10px 20px); }
+.hidden-deed .deed-titles span { color: var(--muted); background: rgba(160,196,255,.06); box-shadow: inset 0 0 0 1px var(--line); font-style: normal; }
+@media (max-width: 1000px) {
+  .st-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .st-intro, .deeds-wrap { grid-template-columns: minmax(0, 1fr); }
+  .tiers { justify-content: flex-start; }
+  .deed-show { position: static; }
+}
+@media (max-width: 760px) {
+  .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .deed-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .st-txt { padding: 10px 11px 12px; }
+  .st-txt h3 { font-size: 15px; }
+  .st-txt p { font-size: 13.5px; }
+}
+@media (max-width: 440px) { .deed-grid { grid-template-columns: minmax(0, 1fr); } }
+
 /* downloads band */
 .dl-band { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.6fr); gap: 16px 28px; padding: 26px; align-items: center; }
 .dl-band .build-v { margin: 10px 0 6px; }
@@ -519,6 +587,8 @@ footer p { margin: 0; }
       <a href="#news">News</a>
       <a href="#path">The Path</a>
       <a href="#skills">Skills</a>
+      <a href="#stations">Stations</a>
+      <a href="#deeds">Deeds</a>
       <a href="#hiscores">Hiscores</a>
       <a href="#downloads">Downloads</a>
       <a href="#play">How to play</a>
@@ -672,6 +742,145 @@ footer p { margin: 0; }
           <div class="t-pet"><i aria-hidden="true">✦</i><span>Pet: <b id="t-pet"></b></span><em id="t-petxp"></em></div>
         </div>
       </aside>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="stations" aria-labelledby="st-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Where things are made</span><h2 id="st-h">Stations</h2></div>
+      <p class="small">Gear isn't made at the crafting table. Every craft has a station of its own.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="st-intro">
+      <p>Build a station at home, then build it up. Each one has five tiers, and each tier opens with its age on the Path. A better station makes finer things, and the gear made at it can roll rarer. Your skill level decides what you know how to make.</p>
+      <div class="tiers" aria-label="Station tiers">
+        <span class="tier-chip" style="--c:#a58250"><i></i>I <b>Rough</b></span>
+        <span class="tier-chip" style="--c:#e39a66"><i></i>II <b>Copper</b></span>
+        <span class="tier-chip" style="--c:#e6e6e6"><i></i>III <b>Iron</b></span>
+        <span class="tier-chip" style="--c:#6ff0e6"><i></i>IV <b>Diamond</b></span>
+        <span class="tier-chip" style="--c:#f8db7a"><i></i>V <b>Masterwork</b></span>
+      </div>
+    </div>
+    <div class="st-grid">
+        <article class="st" style="--c:#e0773a">
+          <div class="st-art"><img src="img/st/weaponsmith_forge.webp" alt="The Weaponsmith's Forge" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="smithing" aria-hidden="true"></canvas>Smithing</span><h3>Weaponsmith's Forge</h3><p>Swords, axes, spears and hammers: every mod's blades, tier by tier.</p></div>
+        </article>
+        <article class="st" style="--c:#9db0c8">
+          <div class="st-art"><img src="img/st/armourer_bench.webp" alt="The Armourer's Bench" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="smithing" aria-hidden="true"></canvas>Smithing</span><h3>Armourer's Bench</h3><p>Plate, mail and leather armour, helms and shields.</p></div>
+        </article>
+        <article class="st" style="--c:#8dbf5a">
+          <div class="st-art"><img src="img/st/fletcher_table.webp" alt="The Fletcher's Table" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="crafting" aria-hidden="true"></canvas>Crafting</span><h3>Fletcher's Table</h3><p>Bows, crossbows, arrows and quivers.</p></div>
+        </article>
+        <article class="st" style="--c:#9a5ae0">
+          <div class="st-art"><img src="img/st/arcane_table.webp" alt="The Arcane Table" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="magic" aria-hidden="true"></canvas>Magic gear</span><h3>Arcane Table</h3><p>Staffs, wands, spell books, robes, rings and amulets.</p></div>
+        </article>
+        <article class="st" style="--c:#c9a46a">
+          <div class="st-art"><img src="img/st/workbench.webp" alt="The Workbench" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="crafting" aria-hidden="true"></canvas>Crafting</span><h3>Workbench</h3><p>Pickaxes, shovels, shears, rods, spyglasses and backpacks.</p></div>
+        </article>
+        <article class="st" style="--c:#50a0d0">
+          <div class="st-art"><img src="img/st/tech_workbench.webp" alt="The Tech Workbench" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="crafting" aria-hidden="true"></canvas>Crafting</span><h3>Tech Workbench</h3><p>The tech mods' gear: chainsaws, drills, jetpacks and suits.</p></div>
+        </article>
+        <article class="st" style="--c:#b98a4a">
+          <div class="st-art"><img src="img/st/assayer_bench.webp" alt="The Assayer's Bench" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="smithing" aria-hidden="true"></canvas>Smithing</span><h3>Assayer's Bench</h3><p>Study a new metal before your tools can be made from it.</p></div>
+        </article>
+        <article class="st" style="--c:#c9a2ff">
+          <div class="st-art"><img src="img/st/reforging_anvil.webp" alt="The Reforging Anvil" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="reforge" aria-hidden="true"></canvas>Smithing</span><h3>Reforging Anvil</h3><p>Reforge rolls, repair, bind enchanted books, grind and rename.</p></div>
+        </article>
+        <article class="st" style="--c:#e0603a">
+          <div class="st-art"><img src="img/st/smelter.webp" alt="The Smelter" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="smithing" aria-hidden="true"></canvas>Smithing</span><h3>Smelter</h3><p>Ore into ingots, eight at a time for one lump of coal.</p></div>
+        </article>
+        <article class="st" style="--c:#a8774a">
+          <div class="st-art"><img src="img/st/tannery.webp" alt="The Tannery" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="crafting" aria-hidden="true"></canvas>Crafting</span><h3>Tannery</h3><p>Leather, hide and fur; cloth, canvas and rope.</p></div>
+        </article>
+        <article class="st" style="--c:#e8a04a">
+          <div class="st-art"><img src="img/st/kitchen.webp" alt="The Kitchen" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="cooking" aria-hidden="true"></canvas>Cooking</span><h3>Kitchen</h3><p>Meals, sweets, feasts and smoked food.</p></div>
+        </article>
+        <article class="st" style="--c:#6fbf6a">
+          <div class="st-art"><img src="img/st/potting_bench.webp" alt="The Potting Bench" width="360" height="340" loading="lazy"></div>
+          <div class="st-txt"><span class="st-skill"><canvas data-icon="farming" aria-hidden="true"></canvas>Farming</span><h3>Potting Bench</h3><p>Hoes, watering cans, seed bags and compost.</p></div>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="deeds" aria-labelledby="deeds-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Glory, written down</span><h2 id="deeds-h">Deeds</h2></div>
+      <p class="small">195 deeds to earn, 64 titles to wear.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="deeds-wrap">
+      <div class="deed-show">
+        <div class="nt-stage" aria-hidden="true">
+          <div class="nt"><span class="nt-title">the Maxed</span><span class="nt-line">AK <em>⚔ 99</em></span></div>
+        </div>
+        <div class="deed-toast gilt">
+          <div class="dt-icon"><canvas data-icon="flag" aria-hidden="true"></canvas></div>
+          <div><span class="dt-k">Deed earned</span><b>Dragonslayer</b><small>Fell the Ender Dragon · Scrap and a title</small></div>
+        </div>
+        <p>Every deed pays Scrap, and deeds are never lost. The big ones give a title: wear it and it floats above your name, and shows in chat and on the player list.</p>
+      </div>
+      <div class="deed-grid">
+          <div class="deed">
+            <div class="deed-top"><h3>Seals</h3><span class="deed-n">11</span></div>
+            <p>Break each seal on the Path. All eight make you the Unsealed.</p>
+            <div class="deed-titles"><span>the Unsealed</span><span>the Undaunted</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>Bosses</h3><span class="deed-n">10</span></div>
+            <p>Fell 1 boss, then 5, 10, 20 and 30. Be first on the server to earn Trailblazer.</p>
+            <div class="deed-titles"><span>Trailblazer</span><span>Dragonslayer</span><span>Legend</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>Mastery</h3><span class="deed-n">7</span></div>
+            <p>Defeat every boss of a pool, from the Wilds to the Void.</p>
+            <div class="deed-titles"><span>Titanslayer</span><span>Voidwalker</span><span>of the Wilds</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>The Hunt</h3><span class="deed-n">70</span></div>
+            <p>Track down every mini-boss in the world, once each.</p>
+            <div class="deed-titles"><span>Beastmaster</span><span>the Monster Hunter</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>Skills</h3><span class="deed-n">29</span></div>
+            <p>Reach 50 and 99 in each skill, and climb the total level.</p>
+            <div class="deed-titles"><span>the Maxed</span><span>the Archmage</span><span>the Chef</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>The Path</h3><span class="deed-n">23</span></div>
+            <p>Unlock nodes across the Path, and every node of a theme.</p>
+            <div class="deed-titles"><span>Pathmaster</span><span>the Explorer</span><span>the Builder</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>The Codex</h3><span class="deed-n">12</span></div>
+            <p>Forge a tool from every material the world holds.</p>
+            <div class="deed-titles"><span>the Smith</span></div>
+          </div>
+          <div class="deed">
+            <div class="deed-top"><h3>Trials</h3><span class="deed-n">9</span></div>
+            <p>Clear Awakening waves, take Pacts, slay your Nemesis.</p>
+            <div class="deed-titles"><span>the Pactbound</span><span>Banebreaker</span></div>
+          </div>
+          <div class="deed hidden-deed">
+            <div class="deed-top"><h3>Hidden</h3><span class="deed-n">24</span></div>
+            <p>Secret deeds show as ??? and a riddle until someone earns one. Most of them give a title.</p>
+            <div class="deed-titles"><span>???</span><span>???</span><span>???</span></div>
+          </div>
+      </div>
     </div>
   </div>
 </section>
