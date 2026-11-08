@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Pathways: a Minecraft modpack in the old MMO tradition. Wash ashore with nothing, train twelve skills to 99, and break the seals on the lost ages."><meta property="og:title" content="Pathways"><meta property="og:type" content="website"><meta property="og:url" content="https://pathwaysmc.net/"><meta property="og:image" content="https://pathwaysmc.net/img/hero_wide.jpg"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://pathwaysmc.net/"><link rel="icon" href="img/favicon.svg" type="image/svg+xml"><link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><meta name="theme-color" content="#0a1322"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Wash ashore in a Minecraft MMO: twelve skills to 99, gear rarities and seals to break. The alpha server opens on Friday, November 13th, at play.pathwaysmc.net."><meta property="og:title" content="Pathways · Alpha server opens Friday the 13th"><meta property="og:site_name" content="pathwaysmc.net"><meta property="og:description" content="Wash ashore in a Minecraft MMO: twelve skills to 99, gear rarities and seals to break. Join at play.pathwaysmc.net."><meta property="og:type" content="website"><meta property="og:url" content="https://pathwaysmc.net/"><meta property="og:image" content="https://pathwaysmc.net/img/og_card.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Pathways: alpha server opens Friday the 13th at play.pathwaysmc.net"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://pathwaysmc.net/"><link rel="icon" href="img/favicon.svg" type="image/svg+xml"><link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><meta name="theme-color" content="#f0b94a"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style></head><body>
 <title>Pathways</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +79,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   background: rgba(10,19,34,.78); box-shadow: inset 0 0 0 1px rgba(240,185,74,.5), 0 10px 30px rgba(0,0,0,.35); backdrop-filter: blur(6px); }
 .ip > div { flex: 1; min-width: 0; padding: 11px 16px 12px; }
 .ip .lbl { display: block; font: 600 11px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.ip code { display: block; margin-top: 6px; font: 700 21px/1.1 var(--display); color: #fff; letter-spacing: .01em; user-select: all; overflow-wrap: anywhere; }
+.ip code { display: block; margin-top: 6px; font: 700 21px/1.1 var(--display); color: #fff; letter-spacing: .01em; user-select: all; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ip button { border: 0; cursor: pointer; padding: 0 18px; font: 700 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: #2a1803;
   background: linear-gradient(180deg, var(--gold-hi), var(--gold) 55%, #d9922c); box-shadow: inset 1px 0 0 #6b4410; min-width: 92px; }
 .ip button:hover { filter: brightness(1.07); }
@@ -112,7 +112,14 @@ section.band { padding-block: 64px; }
   box-shadow: inset 0 0 0 1px rgba(240,185,74,.3), 0 16px 40px rgba(0,0,0,.4); }
 .feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
 .feature:hover img { transform: scale(1.03); }
-.feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 25%, rgba(10,19,34,.7) 60%, rgba(10,19,34,.96) 100%); }
+.feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,19,34,0) 38%, rgba(10,19,34,.5) 54%, rgba(10,19,34,.86) 70%, rgba(10,19,34,.97) 100%); }
+.feature h3 { text-shadow: 0 2px 14px rgba(0,0,0,.45); }
+.feature .count { color: var(--gold-hi); }
+.feature .meta { text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+.feature .count::before { content: "·"; margin-right: 8px; color: var(--muted); }
+.feat-act { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 6px; }
+.feat-act .ip.mini { width: auto; flex: 0 1 300px; }
+.feat-act .more-link { margin: 0; }
 .feature .txt { position: relative; z-index: 1; padding: 28px 30px 30px; display: grid; gap: 10px; }
 .feature h3 { margin: 0; font: 800 clamp(26px, 3vw, 36px)/1.1 var(--display); text-wrap: balance; }
 .feature p { margin: 0; max-width: 54ch; color: #dbe5f5; }
@@ -205,7 +212,8 @@ section.band { padding-block: 64px; }
 .t-pet em { margin-left: auto; font-style: normal; font-weight: 700; color: var(--xp); white-space: nowrap; }
 
 /* ---------- hiscores and builds */
-.two { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 22px; align-items: stretch; }
+.two { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.box.build { position: sticky; top: 84px; }
 .box { padding: 24px; min-width: 0; display: flex; flex-direction: column; }
 .box h3 { margin: 0; font: 800 24px/1.1 var(--display); }
 .box-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; margin-bottom: 16px; }
@@ -236,6 +244,94 @@ section.band { padding-block: 64px; }
 .board tr.ghost td:last-child { box-shadow: inset -1px 1px 0 rgba(160,196,255,.18), inset 0 -1px 0 rgba(160,196,255,.18); }
 .board tr.faint td { background: rgba(10,19,34,.4); padding-block: 14px; }
 .bar-ph { display: block; height: 8px; border-radius: 4px; background: rgba(160,196,255,.14); }
+/* hiscores, full width */
+.hs-box { padding: 24px; display: grid; gap: 18px; }
+.hs-box .hs-tabs { margin: 0; }
+.ak-strip { display: grid; grid-template-columns: 34px auto 1fr auto; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 10px;
+  background: #3a3628; box-shadow: inset 3px 0 0 var(--gold); }
+.ak-strip .cmb { justify-self: end; }
+.pod.skill .c-col { display: none; }
+.pod .who { font-size: 20px; }
+.pod-stat { display: grid; justify-items: center; gap: 3px; }
+.pod-stat > small { font: 600 11px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.pod-stat .max { font-size: 26px; text-align: center; }
+.ak-strip.skill .ak-val { grid-column: 3 / 5; }
+.ak-val { justify-self: end; display: grid; justify-items: end; gap: 4px; text-align: right; }
+.ak-val > small { font: 600 11px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.podium-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: end; }
+.pod { position: relative; display: grid; justify-items: center; gap: 6px; text-align: center; padding: 22px 16px 18px; border-radius: 12px;
+  background: var(--tint); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--edge) 45%, transparent), inset 0 3px 0 var(--edge); min-width: 0; }
+.pod.gold { padding-block: 30px 24px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--edge) 60%, transparent), inset 0 3px 0 var(--edge), 0 0 34px rgba(240,185,74,.18); }
+.pod .pod-rank { font: 700 11px/1 var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); opacity: .8; }
+.pod .claim { font-size: 18px; }
+.pod.gold .claim { font-size: 21px; }
+.pod .claim-sub { margin: 0; font-size: 13.5px; max-width: 26ch; }
+.pod-val { font: 700 16px/1 var(--display); color: var(--ink); opacity: .6; }
+.medal.big { width: 46px; height: 46px; }
+.medal.big b { font-size: 19px; }
+.pod.gold .medal.big { width: 56px; height: 56px; }
+.pod.gold .medal.big b { font-size: 23px; }
+.ranks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; }
+/* hiscores polish: named tabs, caption, muted runners-up, open slots */
+.hs-pick { display: grid; gap: 10px; }
+.hs-tab { position: relative; gap: 7px; grid-auto-flow: column; }
+.hs-tab .nm { display: none; font: 700 12px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--gold-hi); }
+.hs-tab[aria-pressed="true"] .nm { display: inline; padding-right: 4px; }
+.hs-tab[data-name]:not([aria-pressed="true"]):hover::after { content: attr(data-name); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%);
+  white-space: nowrap; padding: 5px 8px; border-radius: 6px; background: #0a1322; box-shadow: inset 0 0 0 1px var(--line); color: var(--text);
+  font: 700 11px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; z-index: 3; pointer-events: none; }
+.hs-cap { margin: 0; font-size: 13.5px; color: var(--muted); }
+.hs-cap b { color: var(--text); }
+.pod.silver .claim, .pod.bronze .claim { color: #c3cddb; text-shadow: none; }
+.ak-face { width: 52px; height: 52px; margin-top: 4px; border-radius: 6px; image-rendering: pixelated; background: #0a1322;
+  box-shadow: 0 0 0 2px #0a1322, 0 0 0 3px var(--gold), 0 6px 16px rgba(0,0,0,.45); }
+.open-ranks { display: grid; gap: 10px; }
+.open-note { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: 14px; color: var(--muted); }
+.open-note b { font: 700 11px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: #8798b6; }
+.open-slots { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.open-slots li { display: grid; justify-items: center; gap: 9px; padding: 12px 6px; border-radius: 8px; border: 1px dashed rgba(160,196,255,.22); }
+.open-slots span { font: 800 15px/1 var(--display); color: #7d8fae; }
+.open-slots i { display: block; width: 62%; height: 5px; border-radius: 3px; background: rgba(160,196,255,.1); }
+.rank-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.rank-list li { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px; padding: 9px 14px; border-radius: 8px; background: rgba(10,19,34,.45); }
+.rank-list .claim { font: 600 14px/1.2 var(--display); color: #6f81a1; }
+.rank-list .dash { color: #4c5d7a; font: 700 14px var(--display); }
+.rank-list .rank-n { font-size: 13px; color: #6f81a1; width: auto; }
+.rank-list li.more { background: transparent; box-shadow: inset 0 0 0 1px rgba(160,196,255,.14); }
+.rank-list li.more .claim { font-weight: 500; font-style: italic; color: #5d6f8d; }
+/* downloads band */
+.dl-band { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.6fr); gap: 16px 28px; padding: 26px; align-items: center; }
+.dl-band .build-v { margin: 10px 0 6px; }
+.dl-band .dls { grid-template-columns: 1fr 1fr; }
+.dl-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+.dl-foot .links { margin: 0; }
+.dl-foot .req { margin: 0; padding: 0; border: 0; }
+/* ranks 4 to 10: compact */
+.board tr.rest td { padding-block: 7px; background: rgba(10,19,34,.4); }
+.board tr.rest .claim { font: 600 14px/1.2 var(--display); color: #6f81a1; }
+.board tr.rest .dash { color: #4c5d7a; font-size: 14px; }
+.board tr.rest .rank-n { font-size: 13px; color: #6f81a1; }
+/* the podium: gold, silver and bronze */
+.podium, .pod { --m1: #fff1a6; --m2: #f0b94a; --m3: #9b6a1d; --tint: rgba(240,185,74,.11); --edge: #f0b94a; --ink: #ffe39a; }
+.podium.silver, .pod.silver { --m1: #ffffff; --m2: #c3ccd6; --m3: #6a7482; --tint: rgba(195,204,214,.08); --edge: #c3ccd6; --ink: #e3e9f0; }
+.podium.bronze, .pod.bronze { --m1: #ffd2a6; --m2: #cd7f32; --m3: #7a4419; --tint: rgba(205,127,50,.09); --edge: #cd7f32; --ink: #f2b98a; }
+.board tr.podium td { background: var(--tint); padding-block: 12px; }
+.board tr.podium td:first-child { box-shadow: inset 3px 0 0 var(--edge); }
+.medal { position: relative; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(circle at 35% 30%, var(--m1), var(--m2) 55%, var(--m3)); box-shadow: 0 0 0 2px #0a1322, 0 0 0 3px var(--m3), 0 3px 8px rgba(0,0,0,.4); }
+.medal b { position: relative; z-index: 1; font: 800 14px/1 var(--display); color: #2a1803; text-shadow: 0 1px 0 rgba(255,255,255,.45); }
+.podium.silver .medal b, .pod.silver .medal b { color: #1e2630; }
+.podium.bronze .medal b, .pod.bronze .medal b { color: #2a1206; }
+.claim { display: block; font: 700 16px/1.2 var(--display); color: var(--ink); }
+.claim-sub { display: block; margin-top: 3px; font-size: 14px; color: var(--muted); }
+.claim-sub b { color: var(--text); }
+.dash { color: var(--ink); opacity: .6; font: 700 16px var(--display); }
+.podium.gold .claim, .pod.gold .claim { text-shadow: 0 0 12px rgba(255,210,74,.35); }
+@media (prefers-reduced-motion: no-preference) {
+  .podium.gold .medal::after, .pod.gold .medal::after { content: ""; position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.75) 50%, transparent 60%);
+    transform: translateX(-120%); animation: medalShine 3.6s ease-in-out infinite; }
+  @keyframes medalShine { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+}
 .rank-n { display: inline-grid; place-items: center; width: 26px; font: 700 15px/1 var(--display); color: #5d6f8d; }
 .you { color: var(--text); font-weight: 700; }
 .rankgem { display: inline-grid; place-items: center; width: 26px; height: 26px; transform: rotate(45deg); border-radius: 4px;
@@ -264,7 +360,7 @@ section.band { padding-block: 64px; }
   box-shadow: 0 0 0 1px #6b4410, inset 0 1px 0 #fff3c8, inset 0 -3px 0 rgba(120,60,0,.35), 0 8px 24px rgba(240,185,74,.2); }
 .dl.gold:hover { filter: brightness(1.06); color: #2a1803; }
 .links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 16px 0 0; font-size: 14.5px; }
-.req { margin: auto 0 0; padding-top: 16px; font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 16px; }
+.req { margin: 0; padding-top: 16px; font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); margin-top: 16px; }
 .small { font-size: 14px; color: var(--muted); margin: 0; }
 
 /* ---------- quest log: a quest giver, objectives that tick, a progress bar */
@@ -296,6 +392,7 @@ section.band { padding-block: 64px; }
 .objectives h4 { margin: 0; font: 700 18px/1.2 var(--display); }
 .objectives li.done h4 { color: #9be38a; }
 .objectives p { margin: 0; font-size: 15px; color: #c9d5ea; }
+.o-when { justify-self: start; font: 700 11px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: #2a1803; background: var(--gold); padding: 5px 8px 4px; border-radius: 4px; }
 .o-act { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .o-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 8px; text-decoration: none; font: 700 13px/1 var(--display); letter-spacing: .04em;
   color: var(--text); background: rgba(38,64,106,.55); box-shadow: inset 0 0 0 1px rgba(232,238,250,.28); }
@@ -304,9 +401,9 @@ section.band { padding-block: 64px; }
 .o-btn.gold:hover { filter: brightness(1.06); color: #2a1803; }
 .o-btn svg { width: 14px; height: 14px; flex: none; }
 .ip.mini { max-width: 100%; box-shadow: inset 0 0 0 1px rgba(240,185,74,.45); background: rgba(10,19,34,.7); }
-.ip.mini > div { padding: 9px 12px; }
-.ip.mini code { margin: 0; font-size: 17px; }
-.ip.mini button { min-width: 74px; padding: 0 12px; font-size: 12px; }
+.ip.mini > div { padding: 10px 12px; }
+.ip.mini code { margin: 0; font-size: 15.5px; letter-spacing: 0; }
+.ip.mini button { min-width: 0; padding: 0 12px; font-size: 11.5px; }
 .q-done[hidden] { display: none; }
 .q-done { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 10px; color: #fff4d0;
   background: linear-gradient(90deg, rgba(240,185,74,.28), rgba(240,185,74,.06)); box-shadow: inset 0 0 0 1px rgba(240,185,74,.55); }
@@ -327,6 +424,8 @@ footer p { margin: 0; }
 
 @media (max-width: 960px) {
   .news2, .spot { grid-template-columns: minmax(0, 1fr); }
+  .dl-band { grid-template-columns: minmax(0, 1fr); }
+  .dl-band .dls { grid-template-columns: minmax(0, 1fr); }
   .feature { min-height: 380px; }
   .spot-pic { min-height: 0; aspect-ratio: 1000 / 710; }
   .path, .skills-wrap, .two { grid-template-columns: minmax(0, 1fr); }
@@ -338,11 +437,18 @@ footer p { margin: 0; }
   body { font-size: 16px; }
   .bar nav { display: none; }
   .bar .in { justify-content: space-between; }
-  .feature { min-height: 420px; }
+  .feature { min-height: 540px; }
   .feature .txt, .spot-txt { padding: 22px 20px 24px; }
   .post { grid-template-columns: 56px minmax(0, 1fr); gap: 12px; }
   .thumb { width: 56px; height: 56px; } .thumb canvas { width: 38px; height: 38px; }
   .pieces { grid-template-columns: 1fr; }
+  .podium-row { grid-template-columns: minmax(0, 1fr); }
+  .podium-row .gold { order: -1; }
+  .ranks { grid-template-columns: minmax(0, 1fr); }
+  .open-slots { gap: 5px; } .open-slots li { padding: 10px 2px; }
+  .ak-strip { grid-template-columns: 30px 1fr auto; }
+  .ak-strip .cmb { display: none; }
+  .hs-box, .dl-band { padding: 18px 14px; }
   .hs-foot b { font-size: 17px; }
   .box { padding: 20px 16px; }
   .slots { gap: 6px; }
@@ -414,6 +520,7 @@ footer p { margin: 0; }
       <a href="#path">The Path</a>
       <a href="#skills">Skills</a>
       <a href="#hiscores">Hiscores</a>
+      <a href="#downloads">Downloads</a>
       <a href="#play">How to play</a>
     </nav>
     <a class="btn btn-gold" href="#play">Play now</a>
@@ -424,7 +531,7 @@ footer p { margin: 0; }
   <img src="img/hero_wide.jpg" alt="An old fisherman on a wooden jetty, looking out over still water at sunset">
   <div class="in">
     <div class="hero-copy">
-      <span class="chip" id="srv-chip"><i aria-hidden="true"></i><span id="srv-text">Alpha server opens Friday 13 November</span></span>
+      <span class="chip" id="srv-chip"><i aria-hidden="true"></i><span id="srv-text">Alpha server opens Friday the 13th</span></span>
       <svg class="logo" viewBox="0 0 1000 250" role="img" aria-label="Pathways"><use href="#pw-logo"/></svg>
       <p class="tag">You wash ashore with nothing. Not even what you knew.</p>
       <div class="ip">
@@ -432,7 +539,7 @@ footer p { margin: 0; }
         <button type="button" class="copy-ip" data-ip="play.pathwaysmc.net">Copy</button>
       </div>
       <div class="ctas">
-        <a class="btn btn-gold" href="#hiscores">Download the pack</a>
+        <a class="btn btn-gold" href="#downloads">Download the pack</a>
         <a class="btn btn-ghost" href="#play">How to play</a>
       </div>
       <p class="hero-note">Alpha 1 · Minecraft 1.21.1 · NeoForge</p>
@@ -448,13 +555,18 @@ footer p { margin: 0; }
     <div class="rule" aria-hidden="true"></div>
     <div class="news2">
       <article class="feature">
-        <img src="img/jetty.jpg" alt="A lantern-lit jetty leading back to the shore" loading="lazy">
+        <img src="img/harbour.jpg" alt="The harbour town under a striped lighthouse, wooden piers running out over the water" loading="lazy" style="object-position:4% 30%">
         <div class="txt">
-          <div class="meta"><span class="cat srv">Server</span> 8 Nov 2026</div>
-          <h3>The alpha server opens Friday 13 November</h3>
-          <p>The first Pathways server opens this Friday at <b>play.pathwaysmc.net</b>. Install the pack now, so you're ready to wash
-            ashore with everyone else on day one. It's an alpha, so expect rough edges and tell us what breaks.</p>
-          <a class="more-link" href="#play">Get ready ›</a>
+          <div class="meta"><span class="cat srv">Server</span> 8 Nov 2026 <span class="count" id="feat-count">Opens Friday the 13th</span></div>
+          <h3>The alpha server opens on Friday the 13th</h3>
+          <p>Wash ashore with everyone else on day one. Install the pack, add the server, and tell us what breaks. It's an alpha, so expect rough edges.</p>
+          <div class="feat-act">
+            <div class="ip mini">
+              <div><code>play.pathwaysmc.net</code></div>
+              <button type="button" class="copy-ip" data-ip="play.pathwaysmc.net">Copy</button>
+            </div>
+            <a class="more-link" href="#downloads">Get the pack ›</a>
+          </div>
         </div>
       </article>
       <div class="posts">
@@ -566,48 +678,71 @@ footer p { margin: 0; }
 
 <section class="band alt" id="hiscores" aria-labelledby="hs-h">
   <div class="in">
-    <div class="head"><div><span class="kicker">Hall of legends</span><h2 id="hs-h">Hiscores &amp; builds</h2></div></div>
+    <div class="head">
+      <div><span class="kicker">Hall of legends</span><h2 id="hs-h">Hiscores</h2></div>
+      <span class="pill">Tracking starts Friday the 13th</span>
+    </div>
     <div class="rule" aria-hidden="true"></div>
-    <div class="two">
-      <div class="box gilt hs-box">
-        <div class="box-top"><h3>Hiscores</h3><span class="pill">Tracking starts Friday 13 November</span></div>
+    <div class="box gilt hs-box">
+      <div class="hs-pick">
         <div class="hs-tabs" id="hs-tabs" role="group" aria-label="Pick a table"></div>
-        <table class="board">
-          <thead><tr><th>Rank</th><th>Player</th><th class="num c-col">Combat</th><th class="num" id="hs-col">Total level</th></tr></thead>
-          <tbody>
-            <tr class="ak">
-              <td><span class="rankgem"><b>★</b></span></td>
-              <td><span class="who"><svg viewBox="0 0 13 11" aria-hidden="true"><path d="M1 10h11V9H1zM1 8h11L13 2 9.5 5 6.5 0 3.5 5 0 2z" fill="#f0b94a" stroke="#000" stroke-width=".6"/></svg>AK <span class="badge">Creator</span></span></td>
-              <td class="num c-col"><span class="cmb">⚔ 99</span></td>
-              <td class="num"><span class="max" id="hs-val">1,188<small id="hs-sub">All 99</small></span></td>
-            </tr>
-            <tr class="ghost"><td><span class="rank-n">1</span></td>
-              <td colspan="3"><span class="you">Your name here.</span> Join <b>play.pathwaysmc.net</b> and start climbing.</td></tr>
-            <tr class="faint" style="opacity:.55"><td><span class="rank-n">2</span></td><td colspan="3"><i class="bar-ph" style="width:38%"></i></td></tr>
-            <tr class="faint" style="opacity:.3"><td><span class="rank-n">3</span></td><td colspan="3"><i class="bar-ph" style="width:26%"></i></td></tr>
-          </tbody>
-        </table>
-        <div class="hs-foot">
-          <div><b>13</b><span>Tables</span></div>
-          <div><b>1,188</b><span>Highest total</span></div>
-          <div><b>99</b><span>Highest combat</span></div>
-        </div>
+        <p class="hs-cap">Every skill has its own table. Showing <b id="hs-name">Overall</b>.</p>
       </div>
-      <div class="box gilt build">
-        <div class="box-top"><span class="pill gold">Latest build</span><span class="b-date" id="lb-date">Minecraft 1.21.1 · NeoForge</span></div>
-        <div class="build-v" id="lb-name">Pathways Alpha 1</div>
-        <div class="dls">
-          <a class="dl gold" href="https://github.com/ImAK9/pathways-releases/releases/latest/download/Pathways.mrpack"><svg class="dl-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M7 1h2v8l3-3 1.4 1.4L8 12.8 2.6 7.4 4 6l3 3z M2 13h12v2H2z" fill="currentColor"/></svg><span><b>Download for Prism</b><small>Prism Launcher, Modrinth App, ATLauncher · <span id="lb-mr">.mrpack</span></small></span></a>
-          <a class="dl" href="https://github.com/ImAK9/pathways-releases/releases/latest/download/Pathways-CurseForge.zip"><svg class="dl-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M7 1h2v8l3-3 1.4 1.4L8 12.8 2.6 7.4 4 6l3 3z M2 13h12v2H2z" fill="currentColor"/></svg><span><b>Download for CurseForge</b><small>The CurseForge app · <span id="lb-cf">.zip</span></small></span></a>
-        </div>
-        <p class="links"><a id="lb-notes" href="https://github.com/ImAK9/pathways-releases/releases/latest">Patch notes</a><a href="https://github.com/ImAK9/pathways-releases/releases/latest/download/Pathways-Server.zip">Server files</a><a href="https://github.com/ImAK9/pathways-releases/releases">All builds</a></p>
-        <p class="req">Needs Minecraft Java with about 8 GB of memory for the game. Your launcher installs NeoForge and every mod.</p>
+      <div class="podium-row">
+          <div class="pod silver">
+            <span class="medal big" aria-hidden="true"><b>2</b></span>
+            <span class="claim">Unclaimed</span>
+            <span class="claim-sub">Your name here. Join <b>play.pathwaysmc.net</b> and climb.</span>
+          </div>
+          <div class="pod gold">
+            <span class="medal big" aria-hidden="true"><b>1</b></span>
+            <img class="ak-face" src="https://mc-heads.net/avatar/HeyAmAK/64" alt="AK's Minecraft face" width="52" height="52" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
+            <span class="who"><svg viewBox="0 0 13 11" aria-hidden="true"><path d="M1 10h11V9H1zM1 8h11L13 2 9.5 5 6.5 0 3.5 5 0 2z" fill="#f0b94a" stroke="#000" stroke-width=".6"/></svg>AK <span class="badge">Creator</span></span>
+            <span class="pod-stat"><small id="hs-col">Total level</small><span class="max" id="hs-val">1,188<small id="hs-sub">All 99</small></span></span>
+            <span class="cmb c-col">⚔ 99 combat</span>
+          </div>
+          <div class="pod bronze">
+            <span class="medal big" aria-hidden="true"><b>3</b></span>
+            <span class="claim">Unclaimed</span>
+            <span class="claim-sub">Your name here. Join <b>play.pathwaysmc.net</b> and climb.</span>
+          </div>
+      </div>
+      <div class="open-ranks">
+        <p class="open-note"><b>Ranks 4 to 10</b>Seven spots open on Friday the 13th</p>
+        <ol class="open-slots" start="4" aria-label="Ranks 4 to 10, unclaimed"><li><span>4</span><i></i></li><li><span>5</span><i></i></li><li><span>6</span><i></i></li><li><span>7</span><i></i></li><li><span>8</span><i></i></li><li><span>9</span><i></i></li><li><span>10</span><i></i></li></ol>
+      </div>
+      <div class="hs-foot">
+        <div><b>12</b><span>Skills</span></div>
+        <div><b>13</b><span>Tables</span></div>
+        <div><b>99</b><span>Max level</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="play" aria-labelledby="play-h">
+<section class="band" id="downloads" aria-labelledby="dl-h">
+  <div class="in">
+    <div class="head"><div><span class="kicker">Get the pack</span><h2 id="dl-h">Downloads</h2></div></div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="dl-band gilt">
+      <div class="dl-ver">
+        <span class="pill gold">Latest build</span>
+        <div class="build-v" id="lb-name">Pathways Alpha 1</div>
+        <span class="b-date" id="lb-date">Minecraft 1.21.1 · NeoForge</span>
+      </div>
+      <div class="dls">
+        <a class="dl gold" href="https://github.com/ImAK9/pathways-releases/releases/latest/download/Pathways.mrpack"><svg class="dl-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M7 1h2v8l3-3 1.4 1.4L8 12.8 2.6 7.4 4 6l3 3z M2 13h12v2H2z" fill="currentColor"/></svg><span><b>Download for Prism</b><small>Prism, Modrinth App, ATLauncher · <span id="lb-mr">.mrpack</span></small></span></a>
+        <a class="dl" href="https://github.com/ImAK9/pathways-releases/releases/latest/download/Pathways-CurseForge.zip"><svg class="dl-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M7 1h2v8l3-3 1.4 1.4L8 12.8 2.6 7.4 4 6l3 3z M2 13h12v2H2z" fill="currentColor"/></svg><span><b>Download for CurseForge</b><small>The CurseForge app · <span id="lb-cf">.zip</span></small></span></a>
+      </div>
+      <div class="dl-foot">
+        <p class="links"><a id="lb-notes" href="https://github.com/ImAK9/pathways-releases/releases/latest">Patch notes</a><a href="https://github.com/ImAK9/pathways-releases/releases/latest/download/Pathways-Server.zip">Server files</a><a href="https://github.com/ImAK9/pathways-releases/releases">All builds</a></p>
+        <p class="req">Needs Minecraft Java with about 8 GB of memory. Your launcher installs NeoForge and every mod.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="play" aria-labelledby="play-h">
   <div class="in">
     <div class="head"><div><span class="kicker">Your first quest</span><h2 id="play-h">How to play</h2></div></div>
     <div class="rule" aria-hidden="true"></div>
@@ -653,7 +788,8 @@ footer p { margin: 0; }
           <button type="button" class="check" id="q-check-2" aria-pressed="false" aria-label="Wash ashore: mark as done"></button>
           <div class="o-body">
             <h4>Wash ashore</h4>
-            <p>From Friday 13 November: add the server under Multiplayer, join, and wake on the island. The Wayfinder waits by his fire; the ferry takes you to the mainland when you're ready.</p>
+            <span class="o-when">Opens Friday the 13th</span>
+            <p>Add the server in Multiplayer and join. You'll wake on the island, by the Wayfinder's fire.</p>
             <div class="o-act">
               <div class="ip mini">
                 <div><code>play.pathwaysmc.net</code></div>
@@ -681,8 +817,8 @@ footer p { margin: 0; }
 
 <script>
 (() => {
-  const PAL = {"o": [24, 18, 16], "W": [240, 244, 248], "M": [196, 204, 212], "m": [140, 150, 162], "n": [92, 102, 114], "H": [214, 164, 98], "w": [164, 112, 56], "v": [112, 72, 34], "G": [255, 228, 120], "g": [230, 172, 50], "h": [160, 108, 30], "R": [255, 140, 140], "r": [220, 64, 64], "q": [150, 32, 40], "B": [170, 220, 255], "b": [90, 160, 230], "c": [40, 90, 160], "P": [226, 190, 255], "p": [160, 100, 230], "d": [96, 52, 160], "L": [190, 240, 140], "l": [110, 190, 70], "k": [50, 120, 40], "E": [250, 250, 240], "e": [210, 206, 196], "f": [150, 146, 140], "Y": [255, 250, 200], "O": [255, 170, 60], "x": [210, 100, 30], "T": [120, 230, 230], "t": [60, 170, 180], "u": [30, 100, 120]};
-  const ICONS = {"mining": ["................", "....ooooooo.....", "..ooWWMMMMmoo...", ".oWWMooooomMmo..", ".oMmo..ovo.omno.", ".omo..ovHo..omo.", ".oo..ovHwo..omo.", "....ovHwo....oo.", "...ovHwo........", "..ovHwo.........", ".ovHwo..........", "ovHwo...........", "oHwo............", ".oo.............", "................", "................"], "woodcutting": ["................", "......oooo......", ".....oWWMMo.....", "....oWMMMMmo....", "...oWMMMMmmooo..", "...oMMMMmmovHo..", "...oMMmmmovHo...", "....omnnovHo....", ".....ooovHo.....", "......ovHo......", ".....ovHo.......", "....ovHo........", "...ovHo.........", "..ovHo..........", "..ovo...........", "...o............"], "farming": [".....o...o......", "....oGo.oGo..o..", "....oGgooGgooGo.", ".o..ogGo.ogoGgo.", "oGo..ogo.ogGgo..", "oGgo.ogoogGgo...", ".ogGooggoggo....", "..oggoggggo.....", "...oogggho......", ".....ogho.......", ".....oLlo.......", ".....oLlo.......", "....oLlko.......", "....oLlko.......", "....oLlko.......", ".....ooo........"], "combat": [".............ooo", "............oWWo", "...........oWMmo", "..........oWMmo.", ".........oWMmo..", "........oWMmo...", "...oo..oWMmo....", "...oGooWMmo.....", "....oGoMmo......", ".....oGgo.......", "....ovoggo......", "...ovHo.oGo.....", "..ovHo...oo.....", ".ovHo...........", "oGgo............", ".oo............."], "ranged": ["....oooo........", "...oHwwvo.......", "..oHwoo.oo......", "..owo....oEo....", ".oHo......oEo...", ".owo.......oEo..", ".owo........oEo.", ".oHoooooooooooGo", ".owo........oEo.", ".owo.......oEo..", ".oHo......oEo...", "..owo....oEo....", "..oHwoo.oo......", "...oHwwvo.......", "....oooo........", "................"], "magic": ["................", "..ooooooooooo...", ".oPPPPPPPPPPpo..", ".oPpdddddddpdo..", ".oPdPPPPPPPdpo..", ".oPdPGGGGGPdpo..", ".oPdPGYYYGPdpo..", ".oPdPGGYGGPdpo..", ".oPdPPGGGPPdpo..", ".oPdPPPPPPPdpo..", ".oPpdddddddpdo..", ".oPPPPPPPPPPpdo.", ".oEEEEEEEEEEEdo.", ".oeeeeeeeeeeedo.", "..ooooooooooooo.", "................"], "fishing": ["...........ooo..", "..........ovHoE.", ".........ovHo.E.", "........ovHo..E.", ".......ovHo...E.", "......ovHo....E.", ".....ovHo.....E.", "....ovHo......E.", "...ovHo......oEo", "..ovHo......oRro", ".oMvo.......oRro", "oMmo........oEeo", "omo..........oo.", ".o..............", "................", "................"], "slayer": ["................", "....oooooooo....", "...oEEEEEEEeo...", "..oEEEEEEEEeeo..", "..oEEEEEEEEeeo..", "..oEooEEEooeeo..", "..oEoqoEEoqofo..", "..oEoooEEoooeo..", "..oeEEEooEEeeo..", "...oeEEEEEEeo...", "....oeoeoeoo....", "....oEoEoEoo....", ".....ooooooo....", "................", "................", "................"], "cooking": ["................", ".....Y...Y......", "....YO..YO......", ".....O...O......", "..oooooooooooo..", ".oMWWWWWWWWWMmo.", "oooooooooooooooo", ".onMMMMMMMMMMmo.", ".onMmmmmmmmmMmo.", ".onMmmmmmmmmMmo.", ".onMmmmmmmmmMmo.", "..onmmmmmmmmno..", "...onnnnnnnno...", "...oxxOOOOxxo...", "..oxYOOYYOOxxo..", "...oooooooooo..."], "smithing": ["................", "................", ".oooooooooooo...", "oWWWWWWWWWWMMo..", "omMMMMMMMMMMmmoo", ".ommmmmmmmmmmmno", "..oonmmmmmnnoo..", "....onmmmmno....", ".....ommmno.....", ".....ommmno.....", "....onmmmmno....", "...ommmmmmmno...", "..oMMMMMMMMmmo..", "..ooooooooooooo.", "................", "................"], "crafting": ["................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "oHvwvwHHvwvwHHvo", "oHwHwHHHwHwHHHvo", "owvwvwwwvwvwwwvo", "oooooooooooooooo", "owHHwHHHHwHHwHwo", "ovooooooooooooHo", "ovo.oMo..oMo.oHo", "ovo.oWo..oHo.owo", "ovo.ono..owo.owo", "ovo.ooo..ooo.owo", "ovo..........owo", "ooo..........ooo", "................"], "agility": ["...........oo...", ".........ooTTo..", "........oTTTto..", ".......oTTTtto..", "......oTTTttuo..", ".....oTTTttuo...", "....oTTTttuo....", "...oTTTttuo.....", "...oTTttuo......", "..oTTttuo.......", "..oTttuoo.......", ".oTtuoo.........", ".ottoo..........", ".oo.............", "o...............", "................"], "nametag": ["................", "................", "................", "....oooooooooo..", "...oHHHHHHHHHHo.", "..oHHHHHHHHHHHwo", ".oHHooHHvvvvvHwo", "oHHo..oHHHHHHHwo", "oHHo..oHvvvHHHwo", ".oHHooHHHHHHHHwo", "..oHHHHHHHHHHHwo", "...owwwwwwwwwwo.", "....oooooooooo..", "................", "................", "................"], "chest": ["................", "................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "owHHHHHHHHHHHwvo", "owwwwwwGGwwwwwvo", "oooooooGgooooooo", "owHHHHHogoHHHwvo", "owHHHHHHHHHHHwvo", "owHHHHHHHHHHHwvo", "owwwwwwwwwwwwwvo", "ovvvvvvvvvvvvvvo", ".oooooooooooooo.", "................", "................", "................"], "party": ["................", "...ooo.....ooo..", "..oHHHo...oHHHo.", "..oHHHo...oHHHo.", "...ooo.....ooo..", "..ooooo...ooooo.", ".oBBBBBo.oRRRRRo", ".oBbbbBo.oRrrrRo", ".oBbbbBo.oRrrrRo", ".obbbbbo.orrrrro", "..oo.oo...oo.oo.", "..oco.oco.oqo.oq", "................", "................", "................", "................"], "chat": ["................", "................", ".oooooooooooooo.", "oEEEEEEEEEEEEEeo", "oEEffffffffEEEeo", "oEEEEEEEEEEEEEeo", "oEEffffffEEEEEeo", "oEEEEEEEEEEEEEeo", "oeeeeeeeeeeeeeeo", ".ooooooooooeeoo.", "..........oeo...", "..........oo....", "................", "................", "................", "................"], "flag": ["................", "...oo...........", "..oMMoooooooo...", "..oMoGGGGGGGGo..", "..oMoGgGGGGGGGo.", "..oMoGGGgGGGGgo.", "..oMoGGGGGGGgo..", "..oMoGgGGGGGGo..", "..oMoooooooooo..", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", ".ommmo..........", ".ooooo.........."], "wardrobe": ["................", "....oo....oo....", "...oPPoooPPPo...", "..oPPPPGGPPPPo..", ".oPPPPPGGPPPPPo.", "oPPpPPPGGPPPpPPo", "oPpoPPPGGPPPopPo", ".oo.oPPGGPPo.oo.", "....oPPGGPPo....", "....oPPPPPPo....", "....oPPPPPPo....", "....opPPPPpo....", "....oGGGGGGo....", "....oggggggo....", ".....oooooo.....", "................"], "materials": ["................", "................", "................", "............Y...", "...........YEY..", "............Y...", "....ooooooo.....", "...oGGGGGGGo....", "...oggggggho....", "...ooooooooo....", ".oooooooooooooo.", "oOOOOOOoWWWWWWWo", "oxxxxxxoMMMMMMno", "oooooooooooooooo", "................", "................"], "talents": ["...o.........o..", "..oPo.......opo.", ".oPPPo.....opppo", "..oPo...o...opo.", "...o...ogo...o..", "....o.ogYgo.o...", "...oGo.ogo.oGo..", "..oGYGo.o.oGYGo.", "...oGo..g..oGo..", "....o.g.g.g.o...", "......g.o.g.....", ".......oGo......", "......oGYGo.....", ".......oGo......", "........o.......", "................"], "reforge": ["....P......p....", "...pYp..P...P...", ".ooopoooooooo...", "oWWWWWWWWWWMMo..", "omMMMMMMMMMMmmoo", ".ommmmmmmmmmmmno", "..oonmmmmmnnoo..", "....onmPpmno....", ".....ommmno.....", ".....ommmno.....", "....onmmmmno....", "...ommmmmmmno...", "..oMMMMMMMMmmo..", "..ooooooooooooo.", "................", "................"]};
+  const PAL = {"o": [24, 18, 16], "W": [240, 244, 248], "M": [196, 204, 212], "m": [140, 150, 162], "n": [92, 102, 114], "H": [214, 164, 98], "w": [164, 112, 56], "v": [112, 72, 34], "G": [255, 228, 120], "g": [230, 172, 50], "h": [160, 108, 30], "R": [255, 140, 140], "r": [220, 64, 64], "q": [150, 32, 40], "B": [170, 220, 255], "b": [90, 160, 230], "c": [40, 90, 160], "P": [226, 190, 255], "p": [160, 100, 230], "d": [96, 52, 160], "L": [190, 240, 140], "l": [110, 190, 70], "k": [50, 120, 40], "E": [250, 250, 240], "e": [210, 206, 196], "f": [150, 146, 140], "Y": [255, 250, 200], "O": [255, 170, 60], "x": [210, 100, 30], "T": [120, 230, 230], "t": [60, 170, 180], "u": [30, 100, 120], "S": [236, 196, 160], "s": [196, 148, 112]};
+  const ICONS = {"mining": ["................", "....ooooooo.....", "..ooWWMMMMmoo...", ".oWWMooooomMmo..", ".oMmo..ovo.omno.", ".omo..ovHo..omo.", ".oo..ovHwo..omo.", "....ovHwo....oo.", "...ovHwo........", "..ovHwo.........", ".ovHwo..........", "ovHwo...........", "oHwo............", ".oo.............", "................", "................"], "woodcutting": ["....oooooooo....", "...ooLLLLLloo...", "..ooLLlLLllloo..", "..oLLLLllllllo..", ".ooLLlllllllkoo.", ".oLLLllllllllko.", ".oLllllllllkkko.", ".oolllllllkkkoo.", "..ollllllkkkko..", "..oollkkkkkkoo..", "...ooowHwkooo...", "....okwHwoo.....", "....oowHwo......", "....oowHwoo.....", "....ovvHwvo.....", "....ooooooo....."], "farming": ["......oGo.......", "...o..oGgo.o....", "..oGo.oghooGo...", "..oGgooGgooGgo..", "..oghooghoogho..", "..oGgooGgooGgo..", "..oghooghoogho..", "..oGgo.lk.oGgo..", "..ogho.lk.ogho..", "...ol..lk..lo...", ".....kolkok.....", "....oHHHHHHo....", "....owwwwwwo....", ".....oklklo.....", ".....l.lk.k.....", "....k..lk..l...."], "combat": [".............ooo", "............oWWo", "...........oWMmo", "..........oWMmo.", ".........oWMmo..", "........oWMmo...", "...oo..oWMmo....", "...oGooWMmo.....", "....oGoMmo......", ".....oGgo.......", "....ovoggo......", "...ovHo.oGo.....", "..ovHo...oo.....", ".ovHo...........", "oGgo............", ".oo............."], "ranged": ["....oooo........", "...oHwwvo.......", "..oHwoo.oo......", "..owo....oEo....", ".oHo......oEo...", ".owo.......oEo..", ".owo........oEo.", ".oHoooooooooooGo", ".owo........oEo.", ".owo.......oEo..", ".oHo......oEo...", "..owo....oEo....", "..oHwoo.oo......", "...oHwwvo.......", "....oooo........", "................"], "magic": [".........oooo...", "........oobco...", ".......ooBooo...", ".......oBco.....", "......ooBcoo....", "......oBYbco....", ".....ooYEYco....", ".....oBbYbcoo...", "....ooBbbbbco...", "....oBbbbbbco...", "...ooBbbbbbcoo..", ".oooGGGGGGGGgooo", ".oBBbbbbbbbbbbbo", ".oocccccccccccoo", "..ooooooooooooo.", "................"], "fishing": ["................", "................", "......ooo.......", ".....oocoo......", "...ooocccoo..ooo", ".oooccccccooooco", ".oBEBBBBBBBBocco", "ooBoBBBBBBBBbbbo", "obbbbbbbbbbbbbbo", "oobbbbbbbbbbbbbo", ".oEEEEEEEEEEocco", ".oooEEEbEEooooco", "...oooocooo..ooo", "......ooo.......", "................", "................"], "slayer": ["................", "....oooooooo....", "...oEEEEEEEeo...", "..oEEEEEEEEeeo..", "..oEEEEEEEEeeo..", "..oEooEEEooeeo..", "..oEoqoEEoqofo..", "..oEoooEEoooeo..", "..oeEEEooEEeeo..", "...oeEEEEEEeo...", "....oeoeoeoo....", "....oEoEoEoo....", ".....ooooooo....", "................", "................", "................"], "cooking": [".....oooooo.....", "....ooEEEEoo....", "..oooEEEEEEooo..", "..oEEEEEEEEEEoo.", ".ooEEEEEEEEEEEo.", ".oEEEEEEEEEEeeo.", ".oEEEEEEEEeeeeo.", ".ooEEEEEeeeeeeo.", "..ooEEeooeeeeoo.", "...offffffffoo..", "...oEEeEEeEEo...", "...oEEeEEeEEo...", "...oeeeeeeeeo...", "...oooooooooo...", "................", "................"], "smithing": ["................", "................", "..ooooooooooooo.", "oooWWWWWWWWWWWoo", "oWWMMMMMMMMMMMmo", "oommMMMMMMMMMmno", ".ooonmmmmmmmnnoo", "...ooomMmmnoooo.", "....oomMmmnoo...", "...oomMMmmmnoo..", "..oomMMMmmmmnoo.", "..oWWWWWWWWWWMo.", "..oMMMMMMMMMMno.", "..onnnnnnnnnnno.", "..ooooooooooooo.", "................"], "crafting": ["................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "oHvwvwHHvwvwHHvo", "oHwHwHHHwHwHHHvo", "owvwvwwwvwvwwwvo", "oooooooooooooooo", "owHHwHHHHwHHwHwo", "ovooooooooooooHo", "ovo.oMo..oMo.oHo", "ovo.oWo..oHo.owo", "ovo.ono..owo.owo", "ovo.ooo..ooo.owo", "ovo..........owo", "ooo..........ooo", "................"], "agility": ["........oooo....", ".......ooSSoo...", ".......oSSSso...", ".......oSSSso...", "......ooossoo...", "..oooooBBBBoo...", "..oSoBBBBBBBooo.", "..ooSBBBBBBoBSo.", "...oooBBBBoooSo.", "....ooccccooooo.", "...ooccooccoo...", "..ooccooooccoo..", ".ooccoo..ooccoo.", ".ovvoo....oovvo.", ".oooo......oooo.", "................"], "nametag": ["................", "................", "................", "....oooooooooo..", "...oHHHHHHHHHHo.", "..oHHHHHHHHHHHwo", ".oHHooHHvvvvvHwo", "oHHo..oHHHHHHHwo", "oHHo..oHvvvHHHwo", ".oHHooHHHHHHHHwo", "..oHHHHHHHHHHHwo", "...owwwwwwwwwwo.", "....oooooooooo..", "................", "................", "................"], "chest": ["................", "................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "owHHHHHHHHHHHwvo", "owwwwwwGGwwwwwvo", "oooooooGgooooooo", "owHHHHHogoHHHwvo", "owHHHHHHHHHHHwvo", "owHHHHHHHHHHHwvo", "owwwwwwwwwwwwwvo", "ovvvvvvvvvvvvvvo", ".oooooooooooooo.", "................", "................", "................"], "party": ["................", "...ooo.....ooo..", "..oHHHo...oHHHo.", "..oHHHo...oHHHo.", "...ooo.....ooo..", "..ooooo...ooooo.", ".oBBBBBo.oRRRRRo", ".oBbbbBo.oRrrrRo", ".oBbbbBo.oRrrrRo", ".obbbbbo.orrrrro", "..oo.oo...oo.oo.", "..oco.oco.oqo.oq", "................", "................", "................", "................"], "chat": ["................", "................", ".oooooooooooooo.", "oEEEEEEEEEEEEEeo", "oEEffffffffEEEeo", "oEEEEEEEEEEEEEeo", "oEEffffffEEEEEeo", "oEEEEEEEEEEEEEeo", "oeeeeeeeeeeeeeeo", ".ooooooooooeeoo.", "..........oeo...", "..........oo....", "................", "................", "................", "................"], "flag": ["................", "...oo...........", "..oMMoooooooo...", "..oMoGGGGGGGGo..", "..oMoGgGGGGGGGo.", "..oMoGGGgGGGGgo.", "..oMoGGGGGGGgo..", "..oMoGgGGGGGGo..", "..oMoooooooooo..", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", ".ommmo..........", ".ooooo.........."], "wardrobe": ["................", "....oo....oo....", "...oPPoooPPPo...", "..oPPPPGGPPPPo..", ".oPPPPPGGPPPPPo.", "oPPpPPPGGPPPpPPo", "oPpoPPPGGPPPopPo", ".oo.oPPGGPPo.oo.", "....oPPGGPPo....", "....oPPPPPPo....", "....oPPPPPPo....", "....opPPPPpo....", "....oGGGGGGo....", "....oggggggo....", ".....oooooo.....", "................"], "materials": ["................", "................", "................", "............Y...", "...........YEY..", "............Y...", "....ooooooo.....", "...oGGGGGGGo....", "...oggggggho....", "...ooooooooo....", ".oooooooooooooo.", "oOOOOOOoWWWWWWWo", "oxxxxxxoMMMMMMno", "oooooooooooooooo", "................", "................"], "talents": ["...o.........o..", "..oPo.......opo.", ".oPPPo.....opppo", "..oPo...o...opo.", "...o...ogo...o..", "....o.ogYgo.o...", "...oGo.ogo.oGo..", "..oGYGo.o.oGYGo.", "...oGo..g..oGo..", "....o.g.g.g.o...", "......g.o.g.....", ".......oGo......", "......oGYGo.....", ".......oGo......", "........o.......", "................"], "reforge": ["....P......p....", "...pYp..P...P...", ".ooopoooooooo...", "oWWWWWWWWWWMMo..", "omMMMMMMMMMMmmoo", ".ommmmmmmmmmmmno", "..oonmmmmmnnoo..", "....onmPpmno....", ".....ommmno.....", ".....ommmno.....", "....onmmmmno....", "...ommmmmmmno...", "..oMMMMMMMMmmo..", "..ooooooooooooo.", "................", "................"]};
   function draw(canvas, icon) {
     const map = ICONS[icon]; if (!map) return;
     canvas.width = 18; canvas.height = 18;
@@ -698,12 +834,12 @@ footer p { margin: 0; }
       ["combat", "Combat", "#e06060", "The Squire", "Up close and personal", "Fight with swords, axes or your bare fists. Every hit you land teaches you something.", "+20% melee damage", "Stronger weapons and armour. Swing a sword above your level and it barely scratches."],
       ["ranged", "Ranged", "#70c070", "The Hawkling", "Bows, crossbows and tridents", "Land shots with bows, crossbows, tridents and guns.", "+20% projectile damage", "Crossbows at level 10, and the rarer bows further up."],
       ["magic", "Magic", "#b080f0", "The Wisp", "Spells, enchanting and potions", "Hurt things with spells, enchant your gear and brew potions.", "+20% spell damage", "Wands, staves and robes of growing power."],
-      ["slayer", "Slayer", "#c04040", "The Grim", "Monster hunting", "Kill monsters, and take hunting tasks from the Wayfinder. Mini-bosses and bosses teach the most.", "+25% damage to bosses", "Task points buy skips, blocked monsters and lamps of knowledge."]]],
+      ["slayer", "Slayer", "#c04040", "The Grim", "Monster hunting", "Kill monsters, and take hunting tasks from Kestrel on the island or Vesk in Landfall. Mini-bosses and bosses teach the most.", "+25% damage to bosses", "Task points buy skips, blocked monsters and lamps of knowledge."]]],
     ["Gathering", [
       ["mining", "Mining", "#9aa4ae", "The Rock Golem", "Stone and ore", "Break stone and ore. The rarer the ore, the more you learn.", "20% chance of double ore", [[50, "Amethyst"], [70, "Emerald"], [90, "Diamond"]]],
       ["woodcutting", "Woodcutting", "#b08850", "The Beaver", "Felling trees", "Chop logs from any tree in the world.", "25% chance of double logs", [[50, "Apple"], [70, "Honeycomb"], [90, "Golden apple"]]],
-      ["fishing", "Fishing", "#5fa8d8", "The Heron", "Rod and line", "Cast a line anywhere there's water. Every catch counts.", "20% chance of a second catch", [[50, "Nautilus shell"], [70, "Prismarine"], [90, "Heart of the sea"]]],
-      ["farming", "Farming", "#8dc55a", "The Tangleroot", "Crops and animals", "Harvest ripe crops, pick berries and breed animals.", "25% chance of double crops", [[50, "Golden carrot"], [70, "Glistering melon"], [90, "Golden apple"]]]]],
+      ["farming", "Farming", "#8dc55a", "The Tangleroot", "Crops and animals", "Harvest ripe crops, pick berries and breed animals.", "25% chance of double crops", [[50, "Golden carrot"], [70, "Glistering melon"], [90, "Golden apple"]]],
+      ["fishing", "Fishing", "#5fa8d8", "The Heron", "Rod and line", "Cast a line anywhere there's water. Every catch counts.", "20% chance of a second catch", [[50, "Nautilus shell"], [70, "Prismarine"], [90, "Heart of the sea"]]]]],
     ["Artisan & support", [
       ["cooking", "Cooking", "#e0904a", "The Ember", "Meals for the road", "Cook in a furnace, smoker or pot, slice on a cutting board, and put meals together.", "20% chance of extra food", "Better meals keep you going on long journeys."],
       ["smithing", "Smithing", "#b0b8c0", "The Anvil Imp", "Metal and gear", "Smelt ingots, and forge tools, weapons and armour.", "15% chance of an extra ingot", "Skilled smiths forge rarer gear, and Brannoc's anvil reforges it."],
@@ -714,7 +850,9 @@ footer p { margin: 0; }
   const host = document.getElementById("skill-groups");
   const tip = document.getElementById("skill-tip");
   const $ = id => document.getElementById(id);
+  let current = 0;
   function pick(k) {
+    current = k;
     const [id, name, col, pet, tag, how, perk, extra] = ALL[k];
     tip.style.setProperty("--c", col);
     draw($("t-canvas"), id);
@@ -736,7 +874,7 @@ footer p { margin: 0; }
     }
     $("t-pet").textContent = pet;
     $("t-petxp").textContent = "+5% " + name + " XP";
-    host.querySelectorAll(".slot").forEach((b, j) => b.setAttribute("aria-pressed", String(j === k)));
+    host.querySelectorAll(".slot").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.k === k)));
   }
   GROUPS.forEach(([gname, skills]) => {
     const g = document.createElement("div"); g.className = "group";
@@ -745,7 +883,7 @@ footer p { margin: 0; }
     skills.forEach(sk => {
       const k = ALL.length; ALL.push(sk);
       const b = document.createElement("button");
-      b.type = "button"; b.className = "slot"; b.id = "skill-" + sk[0]; b.setAttribute("aria-pressed", "false"); b.style.setProperty("--c", sk[2]);
+      b.type = "button"; b.className = "slot"; b.id = "skill-" + sk[0]; b.dataset.k = k; b.setAttribute("aria-pressed", "false"); b.style.setProperty("--c", sk[2]);
       const c = document.createElement("canvas"); c.setAttribute("aria-hidden", "true"); draw(c, sk[0]);
       const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = sk[1];
       b.append(c, nm);
@@ -757,6 +895,19 @@ footer p { margin: 0; }
     g.append(h, row); host.append(g);
   });
   pick(0);
+  // the card keeps the height of its tallest skill, so the page below doesn't jump as you hover
+  const lockTip = () => {
+    const keep = current;
+    tip.style.minHeight = "";
+    let tallest = 0;
+    ALL.forEach((_, k) => { pick(k); tallest = Math.max(tallest, tip.offsetHeight); });
+    pick(keep);
+    tip.style.minHeight = tallest + "px";
+  };
+  lockTip();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockTip);
+  let resizeTimer;
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(lockTip, 150); });
   document.querySelectorAll("canvas[data-icon]").forEach(c => draw(c, c.dataset.icon));
 
   // hiscore tables: Overall, then one per skill (AK is maxed in every one)
@@ -764,7 +915,8 @@ footer p { margin: 0; }
   const pickTable = (btn, label, val, sub) => {
     tabs.querySelectorAll(".hs-tab").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
     $("hs-col").textContent = label; $("hs-val").firstChild.textContent = val; $("hs-sub").textContent = sub;
-    document.querySelector(".board").classList.toggle("skill", btn !== overall);
+    document.querySelector(".pod.gold").classList.toggle("skill", btn !== overall);
+    $("hs-name").textContent = btn === overall ? "Overall" : label.replace(/ level$/, "");
   };
   const overall = document.createElement("button");
   overall.type = "button"; overall.className = "hs-tab"; overall.id = "hs-overall"; overall.textContent = "Overall";
@@ -772,12 +924,21 @@ footer p { margin: 0; }
   tabs.append(overall);
   ALL.forEach(sk => {
     const b = document.createElement("button");
-    b.type = "button"; b.className = "hs-tab"; b.id = "hs-" + sk[0]; b.title = sk[1]; b.setAttribute("aria-label", sk[1] + " hiscores");
-    const c = document.createElement("canvas"); c.setAttribute("aria-hidden", "true"); draw(c, sk[0]); b.append(c);
+    b.type = "button"; b.className = "hs-tab"; b.id = "hs-" + sk[0]; b.dataset.name = sk[1]; b.setAttribute("aria-label", sk[1] + " hiscores");
+    const c = document.createElement("canvas"); c.setAttribute("aria-hidden", "true"); draw(c, sk[0]);
+    const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = sk[1]; b.append(c, nm);
     b.addEventListener("click", () => pickTable(b, sk[1] + " level", "99", "Max"));
     tabs.append(b);
   });
   pickTable(overall, "Total level", "1,188", "All 99");
+
+  // countdown on the server post
+  (() => {
+    const el = $("feat-count"); if (!el) return;
+    const now = new Date(), open = new Date(2026, 10, 13);
+    const days = Math.ceil((open - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
+    el.textContent = days > 1 ? "Opens in " + days + " days" : days === 1 ? "Opens tomorrow" : days === 0 ? "Opens today" : "Live now";
+  })();
 
   // copy the server address (clipboard where allowed; otherwise select it for the viewer)
   document.querySelectorAll(".copy-ip").forEach(btn => btn.addEventListener("click", () => {
@@ -788,7 +949,7 @@ footer p { margin: 0; }
   }));
 
   // is the server up? Only from opening day (Friday 13 November 2026, local time); before that the chip keeps
-  // "opens Friday 13 November". (mcsrvstat.us; a hosted page can ask, a sandboxed preview can't.)
+  // "opens Friday the 13th". (mcsrvstat.us; a hosted page can ask, a sandboxed preview can't.)
   if (new Date() >= new Date(2026, 10, 13)) fetch("https://api.mcsrvstat.us/3/play.pathwaysmc.net")
     .then(r => r.ok ? r.json() : Promise.reject(r.status))
     .then(st => {
