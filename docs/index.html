@@ -336,6 +336,250 @@ section.band { padding-block: 64px; }
 .rank-list .rank-n { font-size: 13px; color: #6f81a1; width: auto; }
 .rank-list li.more { background: transparent; box-shadow: inset 0 0 0 1px rgba(160,196,255,.14); }
 .rank-list li.more .claim { font-weight: 500; font-style: italic; color: #5d6f8d; }
+/* ---------- system cards (seals, rarity, economy, wardrobe, together) */
+.rar-grid, .eco-grid, .tog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+.sg { display: grid; align-content: start; gap: 10px; padding: 18px 18px 16px; border-radius: 12px; background: var(--navy-2); box-shadow: inset 0 0 0 1px var(--line); }
+.sg h3 { display: flex; align-items: center; gap: 10px; margin: 0; font: 700 19px/1.2 var(--display); color: #fff; }
+.sg h3 canvas { width: 30px; height: 30px; padding: 4px; border-radius: 7px; image-rendering: pixelated; background: rgba(10,19,34,.7); box-shadow: inset 0 0 0 1px var(--line); }
+.sg p { margin: 0; font-size: 15.5px; color: #c9d5ea; }
+.sg-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15.5px; color: #c9d5ea; }
+.sg-list li { position: relative; padding-left: 18px; }
+.sg-list li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+.sg-list b { color: #fff; }
+.sg code, .sg kbd, .head kbd { font: 600 13px/1 ui-monospace, Consolas, monospace; padding: 3px 6px; border-radius: 5px; background: rgba(10,19,34,.8); color: var(--gold-hi);
+  box-shadow: inset 0 0 0 1px var(--line); }
+.sg h3 kbd { margin-left: auto; }
+.sg kbd, .head kbd { font-family: var(--display); font-weight: 700; }
+
+/* the Sealgate: the game's model (tools/gen_sealgate.py), rendered; a clip to each moment (img/sealgate/*.webp) */
+.sgate { position: relative; margin: 0; display: grid; justify-items: center; gap: 10px; }
+.sg-view { position: relative; width: 100%; max-width: 420px; aspect-ratio: 520 / 655; }
+.sg-view::before { content: ""; position: absolute; inset: 18% 8% 22%; border-radius: 50%; background: radial-gradient(closest-side, rgba(71,230,214,.16), transparent); filter: blur(10px); }
+.sg-img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.sg-img.drift { animation: sg-drift 6s ease-in-out infinite; }
+@keyframes sg-drift { 50% { transform: translateY(-7px); } }
+@media (prefers-reduced-motion: reduce) { .sg-img.drift { animation: none; } }
+/* its moments, under it */
+.sg-moments { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.sg-moments button { padding: 7px 11px; border: 0; border-radius: 999px; cursor: pointer; font: 600 12.5px/1 var(--display); color: var(--muted);
+  background: rgba(10,19,34,.6); box-shadow: inset 0 0 0 1px var(--line); transition: color .2s, background .2s, box-shadow .2s; }
+.sg-moments button:hover { color: #fff; }
+.sg-moments button[aria-pressed="true"] { color: #12251f; background: linear-gradient(180deg, #b8fff4, #47e6d6); box-shadow: 0 0 16px rgba(71,230,214,.35); }
+.sg-moments button:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.sg-cap { margin: 0; height: 4.4em; max-width: 380px; overflow: hidden; text-align: center; font-size: 14.5px; line-height: 1.45; color: #c9d5ea; }
+.seal-stage { display: grid; grid-template-columns: minmax(300px, 420px) minmax(0, 1fr); gap: 30px; align-items: start; margin-bottom: 24px; }
+/* the seal you pick: its number (the gate's stone), its key, its trophy, its guardian */
+.seal-n { position: absolute; right: -6px; top: -4px; min-width: 22px; padding: 2px 4px; border-radius: 6px; font: 800 10.5px/1.1 var(--display); color: #10182a;
+  background: var(--c); box-shadow: 0 2px 0 rgba(0,0,0,.4); letter-spacing: .02em; }
+.seal-side .seal-detail { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 14px; padding: 18px 20px; }
+.sd-head { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 14px; }
+.sd-num { display: grid; place-items: center; min-width: 52px; height: 52px; padding: 0 6px; border-radius: 10px; font: 400 26px/1 var(--old-sc); color: #10182a;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 70%, #fff), var(--c)); box-shadow: 0 0 22px color-mix(in srgb, var(--c) 45%, transparent); }
+.seal-detail .sd-head > img { width: 44px; height: 44px; image-rendering: pixelated; filter: drop-shadow(0 3px 0 rgba(0,0,0,.45)); }
+.sd-name { display: grid; gap: 2px; min-width: 0; }
+.sd-name span { font: 700 11.5px/1.2 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.seal-detail .sd-name h3 { margin: 0; }
+.sd-tier { padding: 6px 10px; border-radius: 999px; font: 700 12px/1 var(--display); color: var(--gold-hi); background: rgba(10,19,34,.6); box-shadow: inset 0 0 0 1px var(--line); white-space: nowrap; }
+.sd-row { display: grid; gap: 7px; }
+.sd-row[hidden] { display: none; }
+.seal-detail h4 { margin: 0; font: 700 11.5px/1.2 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.sd-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.sd-chips li { padding: 5px 10px; border-radius: 7px; font-size: 14px; line-height: 1.3; color: #e6edf8; background: rgba(10,19,34,.55); box-shadow: inset 0 0 0 1px var(--line); }
+.sd-troph li { color: #fff; background: color-mix(in srgb, var(--c) 16%, rgba(10,19,34,.6)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 50%, transparent); }
+.sd-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.sd-pair p { margin: 4px 0 0; font-size: 15px; line-height: 1.45; color: #dfe7f5; }
+.sd-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.sd-steps .step { position: relative; display: grid; gap: 2px; padding: 22px 14px 12px; border-radius: 12px; background: var(--navy-2); box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow .3s, background .3s; }
+.sd-steps .step b { font: 700 15.5px/1.25 var(--display); color: #fff; }
+.sd-steps .step small { font-size: 13.5px; line-height: 1.35; color: var(--muted); }
+.sd-steps .step-n { top: -11px; left: 12px; }
+.seal-side .sd-steps .step.on { background: linear-gradient(135deg, rgba(71,230,214,.10), var(--navy-2) 60%); box-shadow: inset 0 0 0 1px rgba(71,230,214,.45); }
+@media (max-width: 640px) { .sd-head { grid-template-columns: auto auto 1fr; } .sd-tier { grid-column: 1 / -1; justify-self: start; } .sd-pair, .sd-steps { grid-template-columns: 1fr; } }
+.seal-side { display: grid; gap: 18px; min-width: 0; }
+.seal-side .seal-detail { margin: 0; max-width: none; }
+.seal-side .seal-steps { grid-template-columns: 1fr; gap: 16px; margin: 0; }
+.seal-side .step { transition: box-shadow .3s, background .3s; }
+.seal-side .step.on { background: linear-gradient(135deg, rgba(71,230,214,.10), var(--navy-2) 60%); box-shadow: inset 0 0 0 1px rgba(71,230,214,.45); }
+.seal-side .step.on .step-n { background: linear-gradient(180deg, #b8fff4, #47e6d6); }
+@media (max-width: 1000px) { .seal-stage { grid-template-columns: 1fr; } .sg-view { max-width: 360px; } .seal-side { order: -1; } }
+/* seals: the road, act by act, a seal between each */
+.acts { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: 0.8fr 1.9fr 1.3fr 1.3fr 1.3fr; gap: 10px; }
+.act { display: grid; align-content: start; gap: 12px; padding: 14px 12px 14px; border-radius: 12px; background: var(--navy-2);
+  box-shadow: inset 0 0 0 1px var(--line), inset 0 3px 0 var(--c); min-width: 0; }
+.act-h { display: grid; justify-items: center; text-align: center; gap: 1px; }
+.act-h span { font: 400 14px/1 var(--old-sc); color: var(--gold); letter-spacing: .05em; }
+.act-h b { font: 800 18px/1.2 var(--display); color: #fff; }
+.act-seals { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.seal-b { position: relative; display: grid; justify-items: center; gap: 6px; padding: 0 2px; border: 0; background: none; color: var(--muted); cursor: pointer;
+  font: 700 12px/1.15 var(--display); text-align: center; white-space: nowrap; }
+.seal-b i { position: relative; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--c) 35%, #2a2236), #120f1c 75%);
+  box-shadow: 0 0 0 3px #0e182b, 0 0 0 5px color-mix(in srgb, var(--c) 55%, transparent), 0 6px 14px rgba(0,0,0,.45); transition: transform .18s, box-shadow .18s; }
+.seal-b img { width: 34px; height: 34px; image-rendering: pixelated; filter: drop-shadow(0 2px 0 rgba(0,0,0,.5)); }
+.seal-b:hover i, .seal-b:focus-visible i, .seal-b[aria-pressed="true"] i { transform: translateY(-3px) rotate(-6deg);
+  box-shadow: 0 0 0 3px #0e182b, 0 0 0 5px var(--c), 0 0 26px color-mix(in srgb, var(--c) 70%, transparent); }
+.seal-b:hover, .seal-b[aria-pressed="true"], .seal-b:focus-visible { color: #fff; }
+.seal-b:focus-visible { outline: none; }
+.seal-b:focus-visible span { text-decoration: underline; text-decoration-color: var(--c); text-underline-offset: 3px; }
+.roads-h { margin: 6px 0 12px; font: 700 19px/1.2 var(--display); color: #fff; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.roads-h small { font: 400 14.5px/1.4 var(--body); color: var(--muted); }
+.roads { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+.road { padding: 14px 16px; border-radius: 12px; background: var(--navy-2); box-shadow: inset 0 0 0 1px var(--line), inset 3px 0 0 var(--c); }
+.road h3 { margin: 0; font: 700 16px/1.2 var(--display); color: #fff; }
+.road p { margin: 3px 0 10px; font-size: 13.5px; line-height: 1.4; color: var(--muted); }
+.road ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+.road li { font: 600 12px/1 var(--display); padding: 6px 8px; border-radius: 6px; color: #e8eefa; background: color-mix(in srgb, var(--c) 16%, #0e1a30);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent); }
+.road li.soon { color: var(--muted); background: none; box-shadow: inset 0 0 0 1px dashed; border: 1px dashed var(--line); }
+.seal-detail { --c: #d8dde4; display: grid; grid-template-columns: 84px 1fr; gap: 18px; align-items: center; margin: 0 auto 26px; max-width: 760px;
+  padding: 16px 20px; border-radius: 12px; background: linear-gradient(135deg, color-mix(in srgb, var(--c) 12%, var(--navy-2)), var(--navy-2) 60%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 45%, transparent); transition: background .25s, box-shadow .25s; }
+.seal-detail > img { width: 84px; height: 84px; image-rendering: pixelated; filter: drop-shadow(0 4px 0 rgba(0,0,0,.45)); }
+.seal-detail h3 { margin: 0 0 8px; font: 400 23px/1.2 var(--old-sc); color: var(--gold-hi); letter-spacing: .03em; }
+.seal-detail dl { margin: 0; display: grid; gap: 5px; }
+.seal-detail dl div { display: grid; grid-template-columns: 104px 1fr; gap: 10px; }
+.seal-detail dt { font: 700 12px/1.6 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.seal-detail dd { margin: 0; font-size: 15.5px; color: #dfe7f5; }
+.seal-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; align-items: stretch; }
+.step { position: relative; padding-top: 22px; }
+.step-n { position: absolute; top: -12px; left: 16px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  font: 800 14px/1 var(--display); color: #2a1803; background: linear-gradient(180deg, var(--gold-hi), var(--gold)); box-shadow: 0 0 0 3px #0e182b; }
+.step.gate { grid-template-columns: 1fr 96px; grid-template-rows: auto 1fr; column-gap: 12px; }
+.step.gate h3, .step.gate p { grid-column: 1; }
+.step.gate img { grid-column: 2; grid-row: 1 / span 2; width: 96px; height: auto; align-self: center; filter: drop-shadow(0 8px 14px rgba(0,0,0,.5)); }
+.seal-more { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
+.road-b { padding: 0; border: 0; background: none; font: inherit; color: inherit; cursor: pointer; }
+.road li:has(.road-b) { padding: 0; }
+.road-b { padding: 6px 8px; border-radius: 6px; }
+.road-b:hover, .road-b[aria-pressed="true"] { color: #10182a; background: var(--c); }
+.road-b:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+.road-detail { margin: 0 0 14px; max-width: none; padding: 16px 20px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.road-detail .sd-head { grid-template-columns: auto 1fr auto; }
+.sd-after { justify-self: start; font-size: 14px; color: var(--muted); }
+.rd-body { display: grid; grid-template-columns: 1.3fr 1fr 0.8fr 1.4fr; gap: 16px; align-items: start; }
+.rd-body p { margin: 0; font-size: 14.5px; line-height: 1.45; color: #dfe7f5; }
+.memory blockquote b { display: block; margin-bottom: 4px; font: 400 21px/1.2 var(--old-sc); font-style: normal; color: #fff; }
+.memory blockquote span { display: block; min-height: 2.9em; }
+@media (max-width: 1000px) { .rd-body { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .rd-body { grid-template-columns: 1fr; } .road-detail .sd-head { grid-template-columns: 1fr auto; } .sd-after { grid-row: 2; grid-column: 1 / -1; } }
+.memory { margin: 0; display: grid; align-content: center; gap: 10px; padding: 20px 22px; border-radius: 12px;
+  background: radial-gradient(circle at 20% 0%, rgba(160,120,255,.16), transparent 60%), #120f1c; box-shadow: inset 0 0 0 1px rgba(176,128,240,.35); }
+.memory blockquote { margin: 0; font: italic 19px/1.45 var(--old); color: #efe6ff; }
+.memory blockquote::before { content: "A memory returns"; display: block; margin-bottom: 8px; font: 400 14px/1 var(--old-sc); font-style: normal; color: #c9a2ff; letter-spacing: .06em; }
+.memory figcaption { font-size: 14px; color: var(--muted); }
+.eyes { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; margin-top: 4px; }
+.eyes i { aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #0a0a0a 0 18%, var(--c) 22% 52%, color-mix(in srgb, var(--c) 40%, #000) 58%);
+  box-shadow: 0 0 0 2px #0e182b, 0 0 10px color-mix(in srgb, var(--c) 45%, transparent); }
+
+/* landfall */
+.land-intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: center; margin-bottom: 24px; }
+.land-intro p { margin: 0; color: #c9d5ea; }
+.land-places { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.land-places li { font: 600 13px/1 var(--display); padding: 8px 11px; border-radius: 999px; background: rgba(240,185,74,.1); color: var(--gold-hi);
+  box-shadow: inset 0 0 0 1px rgba(240,185,74,.3); }
+.land-st { display: grid; grid-template-columns: 1fr 1.15fr; gap: 22px; align-items: center; margin-bottom: 18px; padding: 18px 20px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(240,185,74,.13), var(--navy-2) 55%); box-shadow: inset 0 0 0 1px rgba(240,185,74,.4); }
+.land-st h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font: 700 19px/1.2 var(--display); color: var(--gold-hi); }
+.land-st h3 canvas { width: 30px; height: 30px; padding: 4px; border-radius: 7px; image-rendering: pixelated; background: rgba(10,19,34,.7); box-shadow: inset 0 0 0 1px var(--line); }
+.land-st p { margin: 0; font-size: 15.5px; color: #c9d5ea; }
+.land-st-l { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.land-st-l a { display: block; padding: 8px 10px; border-radius: 7px; font: 600 13px/1.2 var(--display); color: var(--text); text-decoration: none; background: rgba(10,19,34,.55);
+  box-shadow: inset 0 0 0 1px var(--line); transition: background .15s, box-shadow .15s; }
+.land-st-l a:hover, .land-st-l a:focus-visible { background: var(--navy-3); box-shadow: inset 0 0 0 1px rgba(240,185,74,.5); outline: none; }
+@media (max-width: 1000px) { .land-st { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .land-st-l { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.folk-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.folk { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: start; padding: 14px; border-radius: 12px; background: var(--navy-2); box-shadow: inset 0 0 0 1px var(--line); }
+.folk img { width: 56px; height: 56px; image-rendering: pixelated; border-radius: 6px; box-shadow: 0 0 0 2px #0e182b, 0 0 0 3px rgba(240,185,74,.45); }
+.folk h3 { margin: 0; font: 700 16.5px/1.2 var(--display); color: #fff; }
+.folk span { display: block; margin: 2px 0 5px; font: italic 14.5px/1.2 var(--old); color: var(--gold); }
+.folk p { margin: 0; font-size: 14.5px; line-height: 1.5; color: #c9d5ea; }
+.land-more { margin: 16px 0 0; text-align: center; font-size: 15px; color: var(--muted); }
+
+/* rarity */
+.rar-wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: center; margin-bottom: 26px; }
+.rar-tiers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.rt { display: grid; gap: 3px; text-align: left; padding: 12px 14px; border: 0; border-radius: 10px; cursor: pointer; color: var(--muted); font: 13.5px/1.35 var(--body);
+  background: var(--navy-2); box-shadow: inset 0 0 0 1px var(--line), inset 4px 0 0 var(--c); transition: background .15s, box-shadow .15s; }
+.rt b { font: 700 17px/1.2 var(--display); color: var(--c); }
+.rt:hover { background: var(--navy-3); }
+.rt[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 12%, var(--navy-2)); color: var(--text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 60%, transparent), inset 4px 0 0 var(--c), 0 0 22px color-mix(in srgb, var(--c) 18%, transparent); }
+.rt:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.rar-show { display: grid; justify-items: center; gap: 12px; }
+.tt { --c: #fff; display: grid; justify-items: start; gap: 3px; min-width: 280px; padding: 12px 16px 14px; border-radius: 4px;
+  font: 17px/1.3 "Minecraft", "Nunito Sans", system-ui, sans-serif; color: #fff; background: rgba(16,0,16,.94);
+  box-shadow: 0 0 0 2px #120313, inset 0 0 0 2px color-mix(in srgb, var(--c) 70%, #2a0a5a), 0 18px 40px rgba(0,0,0,.5); transition: box-shadow .2s; }
+.tt-name { font-weight: 700; color: var(--c); font-size: 18px; }
+.tt-rib { font: 700 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; padding: 4px 7px 3px; border-radius: 3px; color: #120313; background: var(--c); }
+.tt-bon { color: var(--c); font-style: italic; }
+.tt-bon:empty { display: none; }
+.tt-l { margin-top: 6px; color: #aaa; }
+.tt-s { color: #5f8fff; }
+.tt-s:empty { display: none; }
+.tt-req { margin-top: 6px; color: #ffaa33; }
+.tt-dur { color: #ddd; }
+.tt-mk { color: #888; font-style: italic; }
+.tt-cap { margin: 0; font-size: 14px; color: var(--muted); text-align: center; }
+.bon-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.bon-chips span { font: 600 12.5px/1 var(--display); padding: 6px 9px; border-radius: 6px; background: rgba(194,59,255,.12); color: #e6c8ff; box-shadow: inset 0 0 0 1px rgba(194,59,255,.35); }
+.bon-note { font-size: 14.5px !important; color: var(--muted) !important; }
+
+/* dice */
+.dice { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; padding: 12px; border-radius: 10px; background: rgba(10,19,34,.55);
+  box-shadow: inset 0 0 0 1px var(--line); }
+.die { --c: #c9a2ff; position: relative; width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(145deg, #fffaf0, #e8dcc4);
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,.15), 0 0 0 2px #0e182b, 0 0 18px color-mix(in srgb, var(--c) 60%, transparent); transition: box-shadow .3s; }
+.die i { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: #5a2ea0; }
+.die i:nth-child(1) { left: 9px; top: 9px; } .die i:nth-child(2) { right: 9px; top: 9px; } .die i:nth-child(3) { left: 23px; top: 23px; }
+.die i:nth-child(4) { left: 9px; bottom: 9px; } .die i:nth-child(5) { right: 9px; bottom: 9px; }
+.die.roll { animation: tumble .65s cubic-bezier(.3,.7,.4,1); }
+@keyframes tumble { 0% { transform: rotate(0) scale(1); } 40% { transform: rotate(250deg) scale(.82) translateY(-6px); } 100% { transform: rotate(720deg) scale(1); } }
+.dice-out { display: grid; gap: 2px; min-width: 0; }
+.dice-tier { --tc: var(--muted); font: 700 11.5px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--tc); }
+.dice-out b { font: 700 17px/1.25 var(--display); color: #fff; }
+.dice-out small { font-size: 14px; line-height: 1.4; color: var(--muted); }
+.dice-btn { justify-self: start; padding: 10px 18px; font-size: 14px; }
+
+/* capes */
+.cape-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+.cape { margin: 0; display: grid; justify-items: center; gap: 2px; padding: 8px 4px 10px; border-radius: 12px; background: radial-gradient(circle at 50% 40%, #2a2a3c, #191924 70%);
+  box-shadow: inset 0 0 0 1px var(--line); transition: transform .2s, box-shadow .2s; }
+.cape img { width: 100%; max-width: 170px; height: auto; display: block; }
+.cape figcaption { font: 700 14px/1.2 var(--display); color: #fff; }
+.cape:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(240,185,74,.45), 0 12px 26px rgba(0,0,0,.35); }
+.ward-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.max-card { background: linear-gradient(135deg, rgba(240,185,74,.16), var(--navy-2) 60%); box-shadow: inset 0 0 0 1px rgba(240,185,74,.45); }
+.max-card h3 { color: var(--gold-hi); }
+
+/* together */
+.tags { display: grid; gap: 6px; }
+.tg { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,.45); }
+.tg-l { font: 700 15px/1 "Minecraft", var(--display); color: #fff; }
+.tg-l em { font-style: normal; margin-left: 6px; }
+.tg small { font-size: 13px; color: var(--muted); }
+
+@media (max-width: 1000px) {
+  .rar-grid, .eco-grid, .tog-grid, .rar-wrap, .land-intro, .seal-steps, .seal-more { grid-template-columns: 1fr; }
+  .acts { grid-template-columns: 1fr; gap: 8px; }
+  .act { grid-template-columns: 96px 1fr; align-items: center; padding: 10px 12px; box-shadow: inset 0 0 0 1px var(--line), inset 3px 0 0 var(--c); }
+  .act-h { justify-items: start; text-align: left; }
+  .act-seals { justify-content: flex-start; }
+  .roads { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .folk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cape-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .act { grid-template-columns: 1fr; }
+  .roads { grid-template-columns: 1fr; }
+  .seal-detail { padding: 14px; }
+  .step.gate { grid-template-columns: 1fr 72px; }
+  .step.gate img { width: 72px; }
+  .folk-grid, .ward-grid, .rar-tiers { grid-template-columns: 1fr; }
+  .cape-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .tt { min-width: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .die.roll { animation: none; } .cape, .seal-b i, .seal-detail { transition: none; } .cape:hover { transform: none; } }
 /* ---------- difficulty */
 .df-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
 .df { align-content: start; }
@@ -662,7 +906,9 @@ footer p { margin: 0; }
     background: #0b1424; border-bottom: 1px solid var(--line); box-shadow: 0 18px 30px rgba(0,0,0,.5); max-height: calc(100vh - 64px); overflow: auto; }
   .bar.menu-open nav > a { padding: 13px 8px; font-size: 14px; }
   .bar.menu-open nav > a.on::after { left: 8px; right: auto; width: 24px; bottom: 6px; }
-  .dd-btn { display: none; }
+  .dd-btn { display: flex; width: 100%; padding: 12px 8px 4px; font-size: 11px; color: var(--gold); pointer-events: none; background: none !important; }
+  .dd-btn svg { display: none; }
+  .dd.on .dd-btn::after { display: none; }
   .bar nav .dd-panel { position: static; width: auto; padding: 4px 0; opacity: 1; visibility: visible; transform: none; background: none; box-shadow: none; }
   .feature { min-height: 540px; }
   .feature .txt, .spot-txt { padding: 22px 20px 24px; }
@@ -744,15 +990,31 @@ footer p { margin: 0; }
     <a href="#top" aria-label="Pathways, back to top"><svg class="mark" viewBox="0 0 1000 250" role="img" aria-label="Pathways"><use href="#pw-logo"/></svg></a>
     <nav aria-label="Sections" id="site-nav">
       <a href="#news">News</a>
-      <a href="#path">The Path</a>
       <div class="dd">
-        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-game">The Game<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="dd-panel" id="dd-game">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-world">The World<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-panel" id="dd-world">
+          <a href="#path"><canvas data-icon="agility" aria-hidden="true"></canvas><span><b>The Path</b><small>From the wreck to the End</small></span></a>
+          <a href="#seals"><canvas data-icon="combat" aria-hidden="true"></canvas><span><b>Seals &amp; Guardians</b><small>Five acts, ten seals, and the side roads</small></span></a>
+          <a href="#landfall"><canvas data-icon="fishing" aria-hidden="true"></canvas><span><b>Landfall</b><small>Your first home, and its folk</small></span></a>
           <a href="#difficulty"><canvas data-icon="slayer" aria-hidden="true"></canvas><span><b>Difficulty</b><small>Four ways to play, and their twists</small></span></a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-prog">Progress<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-panel" id="dd-prog">
           <a href="#skills"><canvas data-icon="mining" aria-hidden="true"></canvas><span><b>Skills</b><small>Twelve skills, from 1 to 99</small></span></a>
           <a href="#talents"><canvas data-icon="talents" aria-hidden="true"></canvas><span><b>Talents</b><small>Three trees, close to 500 talents</small></span></a>
           <a href="#stations"><canvas data-icon="reforge" aria-hidden="true"></canvas><span><b>Stations</b><small>Where gear, food and ingots are made</small></span></a>
+          <a href="#rarity"><canvas data-icon="materials" aria-hidden="true"></canvas><span><b>Gear rarity</b><small>Common to Mythic, and reforging</small></span></a>
           <a href="#deeds"><canvas data-icon="flag" aria-hidden="true"></canvas><span><b>Deeds</b><small>195 deeds and 64 titles to wear</small></span></a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-tog">Together<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-panel" id="dd-tog">
+          <a href="#economy"><canvas data-icon="chest" aria-hidden="true"></canvas><span><b>Coins, Bounties &amp; Dice</b><small>Earn, hunt and try your luck</small></span></a>
+          <a href="#wardrobe"><canvas data-icon="wardrobe" aria-hidden="true"></canvas><span><b>Capes &amp; Wardrobe</b><small>Skillcapes and cosmetics</small></span></a>
+          <a href="#together"><canvas data-icon="party" aria-hidden="true"></canvas><span><b>Parties &amp; Friends</b><small>Play with others</small></span></a>
         </div>
       </div>
       <a href="#hiscores">Hiscores</a>
@@ -873,7 +1135,8 @@ footer p { margin: 0; }
         <div class="chapter"><h3>The seals</h3>
           <p>This world once knew everything: iron and gold, the Nether's fire, the void past the End. It built faster than the
             land could bear, and broke. The few who were left sealed every age away, to be learned again by someone who earns it.
-            That road is the Path. Learn enough, bring down each seal's guardians, and the next age opens.</p></div>
+            That road is the Path: forge each seal's key, turn it in the Sealgate, bring down what comes out, and the next act
+            opens. With every seal, a little of who you were comes back.</p></div>
         <div class="scroll">
           <q>Tobin saw them from the crow's nest, before the mast went: roofs, north-east of the fires, past the dunes. A town. On no chart I own.</q>
           <cite>Captain's Log, part 3 of 3</cite>
@@ -884,6 +1147,120 @@ footer p { margin: 0; }
         <figure><img src="img/path_forest.jpg" alt="Evening sun through tall birch and oak trees, a figure standing by a forest path" loading="lazy"><figcaption>The road inland from Landfall</figcaption></figure>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="band" id="seals" aria-labelledby="seals-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Five acts, ten seals</span><h2 id="seals-h">Seals &amp; Guardians</h2></div>
+      <p class="small">Every seal opens at the Sealgate in Landfall's square. Bring it its key, and face what comes out. Pick a seal.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <ol class="acts" aria-label="The road, act by act">
+      <li class="act" style="--c:#c9a27a"><div class="act-h"><span>Act I</span><b>The Shore</b></div><div class="act-seals"><button type="button" class="seal-b" data-k="0" style="--c:#f0955a" aria-pressed="true"><i><img src="img/keys/copper.png" alt="" width="16" height="16"><b class="seal-n">I</b></i><span>Copper</span></button></div></li>
+      <li class="act" style="--c:#d8dde4"><div class="act-h"><span>Act II</span><b>Iron</b></div><div class="act-seals"><button type="button" class="seal-b" data-k="1" style="--c:#e2e8f2" aria-pressed="false"><i><img src="img/keys/iron.png" alt="" width="16" height="16"><b class="seal-n">II</b></i><span>Iron</span></button><button type="button" class="seal-b" data-k="2" style="--c:#ffd04a" aria-pressed="false"><i><img src="img/keys/gold.png" alt="" width="16" height="16"><b class="seal-n">III</b></i><span>Gold</span></button><button type="button" class="seal-b" data-k="3" style="--c:#6ff3ee" aria-pressed="false"><i><img src="img/keys/diamond.png" alt="" width="16" height="16"><b class="seal-n">IV</b></i><span>Diamond</span></button></div></li>
+      <li class="act" style="--c:#4fa0a8"><div class="act-h"><span>Act III</span><b>The Deep</b></div><div class="act-seals"><button type="button" class="seal-b" data-k="4" style="--c:#2fc7b4" aria-pressed="false"><i><img src="img/keys/deep.png" alt="" width="16" height="16"><b class="seal-n">V</b></i><span>the Deep</span></button><button type="button" class="seal-b" data-k="5" style="--c:#4f9dff" aria-pressed="false"><i><img src="img/keys/tides.png" alt="" width="16" height="16"><b class="seal-n">VI</b></i><span>the Tides</span></button></div></li>
+      <li class="act" style="--c:#ff7040"><div class="act-h"><span>Act IV</span><b>Fire</b></div><div class="act-seals"><button type="button" class="seal-b" data-k="6" style="--c:#ff6a2a" aria-pressed="false"><i><img src="img/keys/fire.png" alt="" width="16" height="16"><b class="seal-n">VII</b></i><span>Fire</span></button><button type="button" class="seal-b" data-k="7" style="--c:#e8476a" aria-pressed="false"><i><img src="img/keys/ancient.png" alt="" width="16" height="16"><b class="seal-n">VIII</b></i><span>the Ancients</span></button></div></li>
+      <li class="act" style="--c:#b080f0"><div class="act-h"><span>Act V</span><b>The End</b></div><div class="act-seals"><button type="button" class="seal-b" data-k="8" style="--c:#86f06a" aria-pressed="false"><i><img src="img/keys/eyes.png" alt="" width="16" height="16"><b class="seal-n">IX</b></i><span>the Eyes</span></button><button type="button" class="seal-b" data-k="9" style="--c:#c98cff" aria-pressed="false"><i><img src="img/keys/end.png" alt="" width="16" height="16"><b class="seal-n">X</b></i><span>the End</span></button></div></li>
+    </ol>
+    <div class="seal-stage">
+      <figure class="sgate" id="sgate">
+        <div class="sg-view">
+          <img class="sg-img" id="sg-img" src="img/sealgate/still.webp" width="520" height="655" loading="lazy" decoding="async"
+            alt="The Sealgate: a stone arch on a floating isle, sealed by four doors round a gold lock. Ten numbered rune stones float round the arch, I to V lit; grooves up the pillars light for the side roads.">
+        </div>
+        <div class="sg-moments" role="group" aria-label="Play a moment">
+          <button type="button" data-p="idle" aria-pressed="true">Sealed</button>
+          <button type="button" data-p="key" aria-pressed="false">The key turns</button>
+          <button type="button" data-p="open" aria-pressed="false">It opens</button>
+          <button type="button" data-p="break" aria-pressed="false">The seal breaks</button>
+        </div>
+        <figcaption class="sg-cap" id="sg-cap" aria-live="polite">The Sealgate stands sealed in Landfall's square, light leaking through the seams of its doors.</figcaption>
+      </figure>
+      <div class="seal-side">
+    <div class="seal-detail" id="seal-detail" aria-live="polite" style="--c:#4f9dff">
+      <div class="sd-head">
+        <span class="sd-num" id="sd-num" aria-hidden="true">VI</span>
+        <img id="sd-key" src="img/keys/tides.png" alt="" width="16" height="16">
+        <div class="sd-name"><span id="sd-act">Act III · The Deep</span><h3 id="sd-title">Seal of the Tides</h3></div>
+        <span class="sd-tier" id="sd-tier">Forge tier IV</span>
+      </div>
+      <div class="sd-row"><h4>Its key</h4><ul class="sd-chips" id="sd-recipe"><li>4 × Echo shard</li><li>Sculk catalyst</li><li>2 × Diamond</li></ul></div>
+      <div class="sd-row" id="sd-troph-row"><h4>And a trophy off any one of</h4><ul class="sd-chips sd-troph" id="sd-troph"><li>Lifestealer</li><li>Supreme Bonescaller</li><li>Maledictus</li><li>Scylla</li></ul></div>
+      <div class="sd-pair">
+        <div><h4>Its guardian</h4><p id="sd-guard">Captain Cornelia</p></div>
+        <div><h4>Behind it</h4><p id="sd-opens">The ocean's depths, the abyss and the drowned ships</p></div>
+      </div>
+    </div>
+    <ol class="sd-steps" aria-label="Breaking a seal">
+      <li class="step" data-step="1"><span class="step-n">1</span><b>Forge its key</b><small>at a Weaponsmith's Forge</small></li>
+      <li class="step" data-step="2"><span class="step-n">2</span><b>Turn it in the gate</b><small>and its guardian steps out</small></li>
+      <li class="step" data-step="3"><span class="step-n">3</span><b>Bring it down</b><small>all who fought it get the seal</small></li>
+    </ol>
+      </div>
+    </div>
+    <h3 class="roads-h">Side roads <small>Each opens off the main road, never blocks it, and has room for more.</small></h3>
+    <div class="roads"><article class="road" style="--c:#f2b04a"><h3>The Machine Road</h3><p>Create, Modern Industrialization, AE2</p><ol><li><button type="button" class="road-b" data-s="mechanical" aria-pressed="false">Mechanical</button></li><li><button type="button" class="road-b" data-s="steam" aria-pressed="false">Steam</button></li><li><button type="button" class="road-b" data-s="electric" aria-pressed="false">Electric</button></li><li><button type="button" class="road-b" data-s="digital" aria-pressed="false">Digital</button></li><li><button type="button" class="road-b" data-s="atomic" aria-pressed="false">Atomic</button></li><li><button type="button" class="road-b" data-s="quantum" aria-pressed="false">Quantum</button></li><li class="soon">More to come</li></ol></article><article class="road" style="--c:#b58cff"><h3>The Arcane Road</h3><p>Iron&#x27;s Spells &#x27;n Spellbooks and Arms &#x27;n Artifice</p><ol><li><button type="button" class="road-b" data-s="apprentice" aria-pressed="false">Apprentice</button></li><li><button type="button" class="road-b" data-s="battlemage" aria-pressed="false">Battlemage</button></li><li><button type="button" class="road-b" data-s="arcana" aria-pressed="false">Arcana</button></li><li><button type="button" class="road-b" data-s="artifice" aria-pressed="false">Artifice</button></li><li><button type="button" class="road-b" data-s="archmage" aria-pressed="false">Archmage</button></li><li class="soon">More to come</li></ol></article><article class="road" style="--c:#ff5a6a"><h3>The Classes Road</h3><p>The RPG Series: rogues to bards</p><ol><li><button type="button" class="road-b" data-s="initiate" aria-pressed="false">Initiate</button></li><li><button type="button" class="road-b" data-s="specialist" aria-pressed="false">Specialist</button></li><li><button type="button" class="road-b" data-s="veteran" aria-pressed="false">Veteran</button></li><li><button type="button" class="road-b" data-s="legend" aria-pressed="false">Legend</button></li><li class="soon">More to come</li></ol></article><article class="road" style="--c:#ffe08a"><h3>The Relic Road</h3><p>Oathbound Relics and Olympus</p><ol><li><button type="button" class="road-b" data-s="oathbound" aria-pressed="false">The Oath</button></li><li><button type="button" class="road-b" data-s="abyss" aria-pressed="false">The Abyss</button></li><li><button type="button" class="road-b" data-s="inferno" aria-pressed="false">The Inferno</button></li><li><button type="button" class="road-b" data-s="void" aria-pressed="false">The Void</button></li><li class="soon">More to come</li></ol></article></div>
+    <div class="seal-detail road-detail" id="road-detail" aria-live="polite" style="--c:#f2b04a">
+      <div class="sd-head">
+        <div class="sd-name"><span id="rd-road">The Machine Road</span><h3 id="rd-title">The Mechanical Age</h3></div>
+        <span class="sd-after" id="rd-after">After Copper</span>
+        <span class="sd-tier" id="rd-tier">Forge tier II</span>
+      </div>
+      <div class="rd-body">
+        <div class="sd-row"><h4>Its key</h4><ul class="sd-chips" id="rd-recipe"><li>4 × Andesite</li><li>Copper block</li><li>Raw copper block</li><li>2 × Copper ingot</li></ul></div>
+        <div class="sd-row" id="rd-troph-row" hidden><h4>And a trophy off any one of</h4><ul class="sd-chips sd-troph" id="rd-troph"></ul></div>
+        <div class="sd-row"><h4>Its guardian</h4><p id="rd-guard">The Kobolediator</p></div>
+        <div class="sd-row"><h4>Behind it</h4><p id="rd-opens">Opens Create: shafts and cogs, water wheels and belts, and everything built on them.</p></div>
+      </div>
+    </div>
+    <div class="seal-more">
+      <figure class="memory">
+        <blockquote><b id="mem-t">The Bells</b><span id="mem-x">You remember the waves closing over the last tower, and its bells still ringing under the water.</span></blockquote>
+        <figcaption>Every broken seal gives back a memory of who you were. Pick a seal to hear its own.</figcaption>
+      </figure>
+      <article class="sg">
+        <h3>The eye hunt</h3>
+        <p>The Seal of the Eyes wants more than a key: the End portal takes twelve eyes, and none of them are sold. They're hidden in ghost ships, ice mazes and cursed pyramids, and carried by bosses like the Warden, the Leviathan and the Wither.</p>
+        <div class="eyes" aria-hidden="true"><i style="--c:#3a3a46"></i><i style="--c:#a9e8ff"></i><i style="--c:#7ed957"></i><i style="--c:#f0c050"></i><i style="--c:#e39a66"></i><i style="--c:#e04656"></i><i style="--c:#4fa0a8"></i><i style="--c:#ffd66b"></i><i style="--c:#b080f0"></i><i style="--c:#5fd0c0"></i><i style="--c:#ff7a45"></i><i style="--c:#c9a2ff"></i></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="landfall" aria-labelledby="land-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Your first home</span><h2 id="land-h">Landfall</h2></div>
+      <p class="small">A walled village up the road from the beach where you wash ashore.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="land-intro">
+      <p>Landfall is where the castaways gather. Behind its palisade there's a smithy with a Reforging Anvil anyone can use, a provisioner, a mage's tower, a Slayer lodge with trophies on every wall, an inn called the Driftwood, a farm, an orchard and a jetty. At the heart of its square stands the Sealgate, where every seal on the road is opened. Bring the guards their toll and the town is open to you.</p>
+      <ul class="land-places" aria-label="Places in Landfall">
+        <li>The Sealgate</li><li>Smithy</li><li>Provisioner</li><li>Mage's tower</li><li>Slayer lodge</li><li>The Driftwood inn</li><li>Farm and orchard</li><li>Jetty</li><li>Market stalls</li>
+      </ul>
+    </div>
+    <div class="land-st">
+      <div class="land-st-t">
+        <h3><canvas data-icon="reforge" aria-hidden="true"></canvas>Every station, in one town</h3>
+        <p>All twelve crafting stations stand in Landfall, free for anyone to use, so you can make gear, food and ingots before you've built a single bench of your own. The bounty board, enchanting tables and a brewing stand are here too.</p>
+      </div>
+      <ul class="land-st-l" aria-label="Stations in Landfall"><li><a href="#stations">Weaponsmith's Forge</a></li><li><a href="#stations">Armourer's Bench</a></li><li><a href="#stations">Fletcher's Table</a></li><li><a href="#stations">Arcane Table</a></li><li><a href="#stations">Tech Workbench</a></li><li><a href="#stations">Workbench</a></li><li><a href="#stations">Smelter</a></li><li><a href="#stations">Kitchen</a></li><li><a href="#stations">Tannery</a></li><li><a href="#stations">Potting Bench</a></li><li><a href="#stations">Assayer's Bench</a></li><li><a href="#stations">Reforging Anvil</a></li></ul>
+    </div>
+    <div class="folk-grid">
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAwklEQVR4XjVPOwrCQBScbDYhP4KCCmks0ngPLfQYFn46aw9hoyCItYfQ1so6J/AAlgkk5LMyT5xi982wMzvPmiR90zQNXNdF27YwxkBrjbquEUUR9GE5heM4IuZ5DsL3fblp1HxJV1mW8DwPXdfBtm1JIzSP/e0p5LieS/Tuehd+2iygGP/KMvRiD1VVQSklMzUmW+NhzzDuvJrh/fl1SEcxtpcHgiCAlSYDUxSFbMGi7MKS1MgVS/234BdhGEpRGogvRaNVf3FEcdIAAAAASUVORK5CYII=" alt="" width="56" height="56"><div><h3>Brannoc</h3><span>The smith</span><p>Sells metal, arms and armour, buys flint and coal, and reforges whatever you hold.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA4ElEQVR4Xh1Ou2rCYBT+/uRPQm5k0UnBpUMX547i4pRCh/oKCnkAHXwEUbBdS3HpKA4+gbOT4NYuhS7BLTYhCUl+OefAgXP5bmK8GaqmaVAUBWzbRlVV0HUdeZ7DsixoSinUdQ3DMFCWJbIsA5VpmiCifD7GGE0jpGnKTCklA13XxX69hNi+PKrv641Z0WLG0p+rN947rg6NJOeHEy6DHj993+eZbmQtPsIHFb5OULVN/PzFzOy2Ang3Dbuvd2iE+vcbDpWff7lJJQvAwSUF8jwPSZKgHz5xULJ1HAdCCNwBPvRhSlLau8oAAAAASUVORK5CYII=" alt="" width="56" height="56"><div><h3>Wren</h3><span>The provisioner</span><p>Food, farming and supplies. She buys your logs, fibre, rocks and produce for coins.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAuUlEQVR4Xk1POwrCQBSc3WzYBJJjiAiewMpOLL2DB7DRc9hYeAc9gIVXSKcgpBEsFLSV/DYr8yDB18zb92bmzarLceattajrGlprsIjOOXjvoebjjVdKyeCf0IkMl7vtCGVZIooiVFUlLkEQYLXOYcIwhB1MYAG8sxPSNJU3y7kbNBVJkmC5/wo2TdP3dFef190zIInX80GUw+lCUAjPR+55jxmMMTIkOY5jFEUB3bZtH6oj8Dc8RecfR4ZPjphgeGwAAAAASUVORK5CYII=" alt="" width="56" height="56"><div><h3>Aldous</h3><span>The mage</span><p>Arcane goods and XP lamps in his tower. He keeps your Skills and Talents.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA0ElEQVR4Xh1PO47CMBQcJ3YSeyMKdpcClAIWxD2QOAMHyBUoKbeiWy2CgqOEWwAS1FyATxQrimKj90aaZt7MaJ7ofX955xy89xBCMIMgQNM0iOMY0miNKIpYaNsWYRhCSskBay0kHdf5DHVdc5rayKyUwnJ/gJj8jHz9uoPwm8/ZNFZTLHb/UB8dBFVV4XQ5YbXewBjDPA6nrNEWScliu4KxFrdHxU2ZL3D+u4LCIhv0/eP5RJqmvIOWE/gbISC11mid48X0QVmWbEiSBJ/dLt6iV1KfyNtbJwAAAABJRU5ErkJggg==" alt="" width="56" height="56"><div><h3>Vesk</h3><span>The Slayer master</span><p>Hands out monster hunts for Slayer points. His shop holds the Fang of Vesk.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAyklEQVR4XjWPPw/BUBTFz3tt0zZpF5OpEQM+g8VqFBNdbL6RUYhOrBLCZLdSzCaTIE36/8m94S735LyXc35XTIOlwm+SJIFlWUjTFIZhQCkFmec5GzRkxnEMTdNAfpZl0C/hiR/ptxCCtZSSNW3ptzJcdwvc9gEGjQT92gfhdo7zZoae94IsyxKrwxHvXEDXdbiuy5o8qhSjTlNR1HjYxf3x5AqvWsFksUZRFBB+u64IxjRNToiiCJRq2zYDS4JxHIeB6Jo/HG2q+wIUzFXu9XTl5wAAAABJRU5ErkJggg==" alt="" width="56" height="56"><div><h3>Corin & Bram</h3><span>The gate guards</span><p>The way in costs 8 logs and 8 rocks, for the palisade.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAx0lEQVR4Xh1OuwrCQBCcu4QjJCSdjY1IvkPED7ESKxERbWwstbGxsEmh4Jf4CZa2Nn5AAnknJ7MHy+3Mzs6O2s5iW9c1WHxBECDPc/mLooD6PA62bVs4jgPXdYX0fV9EYRhCc0C11hplWcIYg6ZpZKHrOri0PlwSsT+u5vA8D/vzTfBpt4Sm6v5649caRFGELMukJ0dHtZ6MrLUW+9UCn+9PNuPhANfkCWZTm+nY8j5PVVUlJ4j7vpfQmiBNU9CFBAdKKQnK+gNdn2QcX7KbfAAAAABJRU5ErkJggg==" alt="" width="56" height="56"><div><h3>Barnaby</h3><span>The innkeeper</span><p>Pours at the Driftwood, and knows a thing or two about Cooking.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAu0lEQVR4XjVPQQrCMBCcbFNoJaUIinj07F/8gVdf4TcEP+DFk48QQRBUCqLooQdvPXloaSBNZFMysGR3MjvMist+6ZxzEEKA367rEBDHMYhJRhBFUQQppeeMMZDXZ+UbLv5kpwBrLSjVQ5Qfi29JmKYzKDPyM1fuJqAsy7De7HC8v9E0jV/mnjkigngVZ9e2LYrDFtWvF4zzAeaLlQ8sHreTT6m19gTnSJLEb9d1DRlslVJ9KCKwI4v5sj9Bu2PV4Zh82QAAAABJRU5ErkJggg==" alt="" width="56" height="56"><div><h3>Old Tom</h3><span>The fisherman</span><p>Sits at the end of the jetty, legs over the water, rod out.</p></div></article>
+        <article class="folk"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAA3klEQVR4Xh1PvWoCYRCc70fOStQTueaKtEe4F1BCGivFF9B0sZGUIU/gg9gYsBLsbMXOkEpFsbhCFNLE7n64n092F6aY3dmZXdFrPxspJaIogmVZyPMcxIuigNYaYjsfGiEED6hoSDzLMhhjoKlZenpHWSnc1zMW2a9vSJIE5jKFpM1arYLG+QvX2x+jfvqEbVc5RtLGfn/ET2kM3/fY4df6wOFw4jgWUBaRyfcGy90/c8dxEIYhNB0TxzE8z8NgNEKapnBdF0EQoKkURP/FN61Olx2UUgx6mV5cLeZ4AA5xWNIcHuBSAAAAAElFTkSuQmCC" alt="" width="56" height="56"><div><h3>The Wayfinder</h3><span>By the fire</span><p>The first face you see. He'll point you up the road to town.</p></div></article>
+    </div>
+    <p class="land-more">And a dozen more townsfolk, from Marta the weaver by the well to Pip the errand boy. Each has a tip for you under "Any news?".</p>
   </div>
 </section>
 
@@ -1003,10 +1380,10 @@ footer p { margin: 0; }
       <p>Build a station at home, then build it up. Each one has five tiers, and each tier opens with its age on the Path. A better station makes finer things, and the gear made at it can roll rarer. Your skill level decides what you know how to make.</p>
       <ol class="ladder" aria-label="Station tiers">
         <li style="--c:#a58250"><i aria-hidden="true"></i><b><span>I</span> Rough</b><small>From the start</small></li>
-        <li style="--c:#e39a66"><i aria-hidden="true"></i><b><span>II</span> Copper</b><small>Copper Seal</small></li>
-        <li style="--c:#e6e6e6"><i aria-hidden="true"></i><b><span>III</span> Iron</b><small>Iron Seal</small></li>
-        <li style="--c:#6ff0e6"><i aria-hidden="true"></i><b><span>IV</span> Diamond</b><small>Diamond Seal</small></li>
-        <li style="--c:#f8db7a"><i aria-hidden="true"></i><b><span>V</span> Masterwork</b><small>Fire Seal</small></li>
+        <li style="--c:#e39a66"><i aria-hidden="true"></i><b><span>II</span> Copper</b><small>Seal of Copper</small></li>
+        <li style="--c:#e6e6e6"><i aria-hidden="true"></i><b><span>III</span> Iron</b><small>Seal of Iron</small></li>
+        <li style="--c:#6ff0e6"><i aria-hidden="true"></i><b><span>IV</span> Diamond</b><small>Seal of Diamond</small></li>
+        <li style="--c:#f8db7a"><i aria-hidden="true"></i><b><span>V</span> Masterwork</b><small>Seal of the Ancients</small></li>
       </ol>
     </div>
     <div class="st-grid">
@@ -1062,7 +1439,61 @@ footer p { margin: 0; }
   </div>
 </section>
 
-<section class="band" id="deeds" aria-labelledby="deeds-h">
+<section class="band" id="rarity" aria-labelledby="rar-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Common to Mythic</span><h2 id="rar-h">Gear rarity</h2></div>
+      <p class="small">Every piece of gear rolls a rarity. Rarer gear is stronger, lasts longer and carries bonuses.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="rar-wrap">
+      <div class="rar-tiers" role="group" aria-label="Rarity tiers">
+        <button type="button" class="rt" style="--c:#ffffff" data-k="0"><b>Common</b><span>Stats ×1 · Durability ×1</span><span>No bonuses · needs —</span></button>
+        <button type="button" class="rt" style="--c:#66ff22" data-k="1"><b>Uncommon</b><span>Stats ×1.1 · Durability ×1.1</span><span>No bonuses · needs —</span></button>
+        <button type="button" class="rt" style="--c:#2e7bff" data-k="2"><b>Rare</b><span>Stats ×1.2 · Durability ×1.25</span><span>1 bonus · needs +3 levels</span></button>
+        <button type="button" class="rt" style="--c:#c23bff" data-k="3"><b>Epic</b><span>Stats ×1.35 · Durability ×1.4</span><span>1 bonus · needs +6 levels</span></button>
+        <button type="button" class="rt" style="--c:#ffd21e" data-k="4"><b>Legendary</b><span>Stats ×1.5 · Durability ×1.6</span><span>2 bonuses · needs +10 levels</span></button>
+        <button type="button" class="rt" style="--c:#ff2a2a" data-k="5"><b>Mythic</b><span>Stats ×1.75 · Durability ×2</span><span>3 bonuses · needs +15 levels</span></button>
+      </div>
+      <div class="rar-show">
+        <div class="tt" id="tt" style="--c:#c23bff">
+          <b class="tt-name" id="tt-name">Iron Chestplate</b>
+          <span class="tt-rib" id="tt-rib">★ Epic</span>
+          <span class="tt-bon" id="tt-bon">Hardened</span>
+          <span class="tt-l">When on Body:</span>
+          <span class="tt-s" id="tt-arm">+8.1 Armor</span>
+          <span class="tt-s" id="tt-ext">+1 Armor Toughness</span>
+          <span class="tt-req" id="tt-req">Requires Combat 16</span>
+          <span class="tt-dur" id="tt-dur">Durability: 336 / 336</span>
+          <span class="tt-mk">Forged by AK</span>
+        </div>
+        <p class="tt-cap">An Iron Chestplate at each rarity. Pick a tier to see it.</p>
+      </div>
+    </div>
+    <div class="rar-grid">
+      <article class="sg">
+        <h3>Where it comes from</h3>
+        <ul class="sg-list">
+          <li><b>Crafting:</b> your skill caps it. Rare from level 10, Epic from 25, Legendary from 45.</li>
+          <li><b>Chests:</b> rarer finds in dangerous places like strongholds, bastions and ancient cities.</li>
+          <li><b>Bosses:</b> always Epic or better. The main road to Mythic.</li>
+          <li><b>Fortune's Dice:</b> a lucky roll can lift what you hold a tier, or make it Mythic.</li>
+        </ul>
+      </article>
+      <article class="sg">
+        <h3>Reforging</h3>
+        <p>Bring gear to Brannoc, or to a Reforging Anvil, and roll its rarity again for coins. It never comes out worse. Smithing tips the odds, and Mythic is a one-in-a-thousand strike. Mythic weapons heal you for a tenth of the damage they deal.</p>
+      </article>
+      <article class="sg">
+        <h3>Bonuses</h3>
+        <div class="bon-chips"><span>Vital</span><span>Fleet</span><span>Steady</span><span>Hardened</span><span>Lucky</span><span>Keen</span><span>Swift</span><span>Long</span><span>Efficient</span><span>Reaching</span><span>Empowered</span><span>Hasted</span><span>Focused</span></div>
+        <p class="bon-note">Extra health, speed, toughness, damage, reach, mining speed and spell power, drawn by the kind of gear.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="deeds" aria-labelledby="deeds-h">
   <div class="in">
     <div class="head">
       <div><span class="kicker">Glory, written down</span><h2 id="deeds-h">Deeds</h2></div>
@@ -1084,7 +1515,7 @@ footer p { margin: 0; }
       <div class="deed-grid">
           <div class="deed">
             <div class="deed-top"><canvas data-icon="chest" aria-hidden="true"></canvas><h3>Seals</h3><span class="deed-n">11</span></div>
-            <p>Break each seal on the Path. All eight make you the Unsealed.</p>
+            <p>Break the seals on the Path. Eight make you the Unsealed.</p>
             <div class="deed-titles"><button type="button" class="try">the Unsealed</button><button type="button" class="try">the Undaunted</button></div>
           </div>
           <div class="deed">
@@ -1128,6 +1559,111 @@ footer p { margin: 0; }
             <div class="deed-titles"><span>???</span><span>???</span><span>???</span></div>
           </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="economy" aria-labelledby="eco-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Coin and chance</span><h2 id="eco-h">Coins, Bounties &amp; Dice</h2></div>
+      <p class="small">Earn coins, take on bounties and hunts, and test your luck.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="eco-grid">
+      <article class="sg">
+        <h3><canvas data-icon="chest" aria-hidden="true"></canvas>Coins</h3>
+        <ul class="sg-list">
+          <li><b>Sell</b> logs, fibre, rocks and produce to Wren, flint and coal to Brannoc.</li>
+          <li><b>Spend</b> them in the town's shops, on reforging and in the Wardrobe.</li>
+          <li><b>Trade</b> with other players: <code>/trade</code> opens a window for coins and items, and both sides accept.</li>
+          <li><b>Your name on it:</b> gear you make says "Forged by" you.</li>
+        </ul>
+      </article>
+      <article class="sg">
+        <h3><canvas data-icon="flag" aria-hidden="true"></canvas>Bounties &amp; hunts</h3>
+        <ul class="sg-list">
+          <li><b>Three bounties</b> wait on your Path every dawn. Finish them before the next for Scrap.</li>
+          <li><b>Slayer tasks</b> from Kestrel on the island or Vesk in Landfall: hunt a monster, earn Slayer points and XP.</li>
+          <li><b>Vesk's shop</b> trades points for skips, blocks and the Fang of Vesk.</li>
+        </ul>
+      </article>
+      <article class="sg dice-card">
+        <h3><canvas data-icon="dice" aria-hidden="true"></canvas>Fortune's Dice</h3>
+        <p>Found in chests, on monsters, in the rock and on the line. Throw one and fate picks a face, from Pocket Change to Mythic Touch.</p>
+        <div class="dice" id="dice">
+          <div class="die" id="die" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="dice-out" aria-live="polite"><span class="dice-tier" id="dice-tier">Roll the die</span><b id="dice-face">What will it be?</b><small id="dice-what"></small></div>
+        </div>
+        <button type="button" class="btn btn-ghost dice-btn" id="dice-btn">Throw</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="wardrobe" aria-labelledby="ward-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Dress for the road</span><h2 id="ward-h">Capes &amp; the Wardrobe</h2></div>
+      <p class="small">Reach 99 in a skill and its cape is yours.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="cape-grid">
+      <figure class="cape"><img src="img/capes/combat.webp" alt="The Combat skillcape" width="220" height="224" loading="lazy"><figcaption>Combat</figcaption></figure>
+      <figure class="cape"><img src="img/capes/ranged.webp" alt="The Ranged skillcape" width="220" height="224" loading="lazy"><figcaption>Ranged</figcaption></figure>
+      <figure class="cape"><img src="img/capes/magic.webp" alt="The Magic skillcape" width="220" height="224" loading="lazy"><figcaption>Magic</figcaption></figure>
+      <figure class="cape"><img src="img/capes/slayer.webp" alt="The Slayer skillcape" width="220" height="224" loading="lazy"><figcaption>Slayer</figcaption></figure>
+      <figure class="cape"><img src="img/capes/mining.webp" alt="The Mining skillcape" width="220" height="224" loading="lazy"><figcaption>Mining</figcaption></figure>
+      <figure class="cape"><img src="img/capes/woodcutting.webp" alt="The Woodcutting skillcape" width="220" height="224" loading="lazy"><figcaption>Woodcutting</figcaption></figure>
+      <figure class="cape"><img src="img/capes/farming.webp" alt="The Farming skillcape" width="220" height="224" loading="lazy"><figcaption>Farming</figcaption></figure>
+      <figure class="cape"><img src="img/capes/fishing.webp" alt="The Fishing skillcape" width="220" height="224" loading="lazy"><figcaption>Fishing</figcaption></figure>
+      <figure class="cape"><img src="img/capes/cooking.webp" alt="The Cooking skillcape" width="220" height="224" loading="lazy"><figcaption>Cooking</figcaption></figure>
+      <figure class="cape"><img src="img/capes/smithing.webp" alt="The Smithing skillcape" width="220" height="224" loading="lazy"><figcaption>Smithing</figcaption></figure>
+      <figure class="cape"><img src="img/capes/crafting.webp" alt="The Crafting skillcape" width="220" height="224" loading="lazy"><figcaption>Crafting</figcaption></figure>
+      <figure class="cape"><img src="img/capes/agility.webp" alt="The Agility skillcape" width="220" height="224" loading="lazy"><figcaption>Agility</figcaption></figure>
+    </div>
+    <div class="ward-grid">
+      <article class="sg max-card">
+        <h3>The Max cape</h3>
+        <p>For whoever masters all twelve: a tail for every skill and a halo that turns above your head.</p>
+      </article>
+      <article class="sg">
+        <h3>The Wardrobe <kbd>O</kbd></h3>
+        <p>Wear sets, hide your cape, and collect pieces with coins, Slayer points and deeds.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="together" aria-labelledby="tog-h">
+  <div class="in">
+    <div class="head">
+      <div><span class="kicker">Better together</span><h2 id="tog-h">Parties &amp; Friends</h2></div>
+      <p class="small">Press <kbd>P</kbd> for your party and friends list.</p>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="tog-grid">
+      <article class="sg">
+        <h3><canvas data-icon="party" aria-hidden="true"></canvas>Parties</h3>
+        <ul class="sg-list">
+          <li><b>Up to six</b> adventurers, with their health and whereabouts on your screen.</li>
+          <li><b>No friendly fire,</b> and kills count for everyone's tasks within 48 blocks.</li>
+          <li><b>Party chat</b> with <code>/p</code>.</li>
+        </ul>
+      </article>
+      <article class="sg">
+        <h3><canvas data-icon="chat" aria-hidden="true"></canvas>Friends</h3>
+        <ul class="sg-list">
+          <li><b>A friends list</b> that tells you who's online, and when the rest were last seen.</li>
+          <li><b>Inspect anyone:</b> sneak and right-click a player to see their gear, skills, cosmetics and journey.</li>
+          <li><b>Trade</b> coins and items, face to face.</li>
+        </ul>
+      </article>
+      <article class="sg">
+        <h3><canvas data-icon="nametag" aria-hidden="true"></canvas>Name tags</h3>
+        <p>Every name shows a combat level, coloured against yours, with a worn title above. If you're level 30:</p>
+        <div class="tags" aria-hidden="true"><div class="tg"><span class="tg-l">Aria <em style="color:#3fd43f">⚔ 15</em></span><small>Much weaker</small></div><div class="tg"><span class="tg-l">Aria <em style="color:#a6e85e">⚔ 25</em></span><small>Weaker</small></div><div class="tg"><span class="tg-l">Aria <em style="color:#ffe14d">⚔ 30</em></span><small>Your match</small></div><div class="tg"><span class="tg-l">Aria <em style="color:#ff9a3c">⚔ 35</em></span><small>Stronger</small></div><div class="tg"><span class="tg-l">Aria <em style="color:#ff4a3a">⚔ 45</em></span><small>Much stronger</small></div></div>
+      </article>
     </div>
   </div>
 </section>
@@ -1274,7 +1810,7 @@ footer p { margin: 0; }
 <script>
 (() => {
   const PAL = {"o": [24, 18, 16], "W": [240, 244, 248], "M": [196, 204, 212], "m": [140, 150, 162], "n": [92, 102, 114], "H": [214, 164, 98], "w": [164, 112, 56], "v": [112, 72, 34], "G": [255, 228, 120], "g": [230, 172, 50], "h": [160, 108, 30], "R": [255, 140, 140], "r": [220, 64, 64], "q": [150, 32, 40], "B": [170, 220, 255], "b": [90, 160, 230], "c": [40, 90, 160], "P": [226, 190, 255], "p": [160, 100, 230], "d": [96, 52, 160], "L": [190, 240, 140], "l": [110, 190, 70], "k": [50, 120, 40], "E": [250, 250, 240], "e": [210, 206, 196], "f": [150, 146, 140], "Y": [255, 250, 200], "O": [255, 170, 60], "x": [210, 100, 30], "T": [120, 230, 230], "t": [60, 170, 180], "u": [30, 100, 120], "S": [236, 196, 160], "s": [196, 148, 112]};
-  const ICONS = {"mining": ["................", "....ooooooo.....", "..ooWWMMMMmoo...", ".oWWMooooomMmo..", ".oMmo..ovo.omno.", ".omo..ovHo..omo.", ".oo..ovHwo..omo.", "....ovHwo....oo.", "...ovHwo........", "..ovHwo.........", ".ovHwo..........", "ovHwo...........", "oHwo............", ".oo.............", "................", "................"], "woodcutting": ["....oooooooo....", "...ooLLLLLloo...", "..ooLLlLLllloo..", "..oLLLLllllllo..", ".ooLLlllllllkoo.", ".oLLLllllllllko.", ".oLllllllllkkko.", ".oolllllllkkkoo.", "..ollllllkkkko..", "..oollkkkkkkoo..", "...ooowHwkooo...", "....okwHwoo.....", "....oowHwo......", "....oowHwoo.....", "....ovvHwvo.....", "....ooooooo....."], "farming": ["......oGo.......", "...o..oGgo.o....", "..oGo.oghooGo...", "..oGgooGgooGgo..", "..oghooghoogho..", "..oGgooGgooGgo..", "..oghooghoogho..", "..oGgo.lk.oGgo..", "..ogho.lk.ogho..", "...ol..lk..lo...", ".....kolkok.....", "....oHHHHHHo....", "....owwwwwwo....", ".....oklklo.....", ".....l.lk.k.....", "....k..lk..l...."], "combat": [".............ooo", "............oWWo", "...........oWMmo", "..........oWMmo.", ".........oWMmo..", "........oWMmo...", "...oo..oWMmo....", "...oGooWMmo.....", "....oGoMmo......", ".....oGgo.......", "....ovoggo......", "...ovHo.oGo.....", "..ovHo...oo.....", ".ovHo...........", "oGgo............", ".oo............."], "ranged": ["....oooo........", "...oHwwvo.......", "..oHwoo.oo......", "..owo....oEo....", ".oHo......oEo...", ".owo.......oEo..", ".owo........oEo.", ".oHoooooooooooGo", ".owo........oEo.", ".owo.......oEo..", ".oHo......oEo...", "..owo....oEo....", "..oHwoo.oo......", "...oHwwvo.......", "....oooo........", "................"], "magic": [".........oooo...", "........oobco...", ".......ooBooo...", ".......oBco.....", "......ooBcoo....", "......oBYbco....", ".....ooYEYco....", ".....oBbYbcoo...", "....ooBbbbbco...", "....oBbbbbbco...", "...ooBbbbbbcoo..", ".oooGGGGGGGGgooo", ".oBBbbbbbbbbbbbo", ".oocccccccccccoo", "..ooooooooooooo.", "................"], "fishing": ["................", "................", "......ooo.......", ".....oocoo......", "...ooocccoo..ooo", ".oooccccccooooco", ".oBEBBBBBBBBocco", "ooBoBBBBBBBBbbbo", "obbbbbbbbbbbbbbo", "oobbbbbbbbbbbbbo", ".oEEEEEEEEEEocco", ".oooEEEbEEooooco", "...oooocooo..ooo", "......ooo.......", "................", "................"], "slayer": ["................", "....oooooooo....", "...oEEEEEEEeo...", "..oEEEEEEEEeeo..", "..oEEEEEEEEeeo..", "..oEooEEEooeeo..", "..oEoqoEEoqofo..", "..oEoooEEoooeo..", "..oeEEEooEEeeo..", "...oeEEEEEEeo...", "....oeoeoeoo....", "....oEoEoEoo....", ".....ooooooo....", "................", "................", "................"], "cooking": [".....oooooo.....", "....ooEEEEoo....", "..oooEEEEEEooo..", "..oEEEEEEEEEEoo.", ".ooEEEEEEEEEEEo.", ".oEEEEEEEEEEeeo.", ".oEEEEEEEEeeeeo.", ".ooEEEEEeeeeeeo.", "..ooEEeooeeeeoo.", "...offffffffoo..", "...oEEeEEeEEo...", "...oEEeEEeEEo...", "...oeeeeeeeeo...", "...oooooooooo...", "................", "................"], "smithing": ["................", "................", "..ooooooooooooo.", "oooWWWWWWWWWWWoo", "oWWMMMMMMMMMMMmo", "oommMMMMMMMMMmno", ".ooonmmmmmmmnnoo", "...ooomMmmnoooo.", "....oomMmmnoo...", "...oomMMmmmnoo..", "..oomMMMmmmmnoo.", "..oWWWWWWWWWWMo.", "..oMMMMMMMMMMno.", "..onnnnnnnnnnno.", "..ooooooooooooo.", "................"], "crafting": ["................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "oHvwvwHHvwvwHHvo", "oHwHwHHHwHwHHHvo", "owvwvwwwvwvwwwvo", "oooooooooooooooo", "owHHwHHHHwHHwHwo", "ovooooooooooooHo", "ovo.oMo..oMo.oHo", "ovo.oWo..oHo.owo", "ovo.ono..owo.owo", "ovo.ooo..ooo.owo", "ovo..........owo", "ooo..........ooo", "................"], "agility": ["........oooo....", ".......ooSSoo...", ".......oSSSso...", ".......oSSSso...", "......ooossoo...", "..oooooBBBBoo...", "..oSoBBBBBBBooo.", "..ooSBBBBBBoBSo.", "...oooBBBBoooSo.", "....ooccccooooo.", "...ooccooccoo...", "..ooccooooccoo..", ".ooccoo..ooccoo.", ".ovvoo....oovvo.", ".oooo......oooo.", "................"], "nametag": ["................", "................", "................", "....oooooooooo..", "...oHHHHHHHHHHo.", "..oHHHHHHHHHHHwo", ".oHHooHHvvvvvHwo", "oHHo..oHHHHHHHwo", "oHHo..oHvvvHHHwo", ".oHHooHHHHHHHHwo", "..oHHHHHHHHHHHwo", "...owwwwwwwwwwo.", "....oooooooooo..", "................", "................", "................"], "chest": ["................", "................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "owHHHHHHHHHHHwvo", "owwwwwwGGwwwwwvo", "oooooooGgooooooo", "owHHHHHogoHHHwvo", "owHHHHHHHHHHHwvo", "owHHHHHHHHHHHwvo", "owwwwwwwwwwwwwvo", "ovvvvvvvvvvvvvvo", ".oooooooooooooo.", "................", "................", "................"], "party": ["................", "...ooo.....ooo..", "..oHHHo...oHHHo.", "..oHHHo...oHHHo.", "...ooo.....ooo..", "..ooooo...ooooo.", ".oBBBBBo.oRRRRRo", ".oBbbbBo.oRrrrRo", ".oBbbbBo.oRrrrRo", ".obbbbbo.orrrrro", "..oo.oo...oo.oo.", "..oco.oco.oqo.oq", "................", "................", "................", "................"], "chat": ["................", "................", ".oooooooooooooo.", "oEEEEEEEEEEEEEeo", "oEEffffffffEEEeo", "oEEEEEEEEEEEEEeo", "oEEffffffEEEEEeo", "oEEEEEEEEEEEEEeo", "oeeeeeeeeeeeeeeo", ".ooooooooooeeoo.", "..........oeo...", "..........oo....", "................", "................", "................", "................"], "flag": ["................", "...oo...........", "..oMMoooooooo...", "..oMoGGGGGGGGo..", "..oMoGgGGGGGGGo.", "..oMoGGGgGGGGgo.", "..oMoGGGGGGGgo..", "..oMoGgGGGGGGo..", "..oMoooooooooo..", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", ".ommmo..........", ".ooooo.........."], "wardrobe": ["................", "....oo....oo....", "...oPPoooPPPo...", "..oPPPPGGPPPPo..", ".oPPPPPGGPPPPPo.", "oPPpPPPGGPPPpPPo", "oPpoPPPGGPPPopPo", ".oo.oPPGGPPo.oo.", "....oPPGGPPo....", "....oPPPPPPo....", "....oPPPPPPo....", "....opPPPPpo....", "....oGGGGGGo....", "....oggggggo....", ".....oooooo.....", "................"], "materials": ["................", "................", "................", "............Y...", "...........YEY..", "............Y...", "....ooooooo.....", "...oGGGGGGGo....", "...oggggggho....", "...ooooooooo....", ".oooooooooooooo.", "oOOOOOOoWWWWWWWo", "oxxxxxxoMMMMMMno", "oooooooooooooooo", "................", "................"], "talents": ["...o.........o..", "..oPo.......opo.", ".oPPPo.....opppo", "..oPo...o...opo.", "...o...ogo...o..", "....o.ogYgo.o...", "...oGo.ogo.oGo..", "..oGYGo.o.oGYGo.", "...oGo..g..oGo..", "....o.g.g.g.o...", "......g.o.g.....", ".......oGo......", "......oGYGo.....", ".......oGo......", "........o.......", "................"], "reforge": ["....P......p....", "...pYp..P...P...", ".ooopoooooooo...", "oWWWWWWWWWWMMo..", "omMMMMMMMMMMmmoo", ".ommmmmmmmmmmmno", "..oonmmmmmnnoo..", "....onmPpmno....", ".....ommmno.....", ".....ommmno.....", "....onmmmmno....", "...ommmmmmmno...", "..oMMMMMMMMmmo..", "..ooooooooooooo.", "................", "................"]};
+  const ICONS = {"mining": ["................", "....ooooooo.....", "..ooWWMMMMmoo...", ".oWWMooooomMmo..", ".oMmo..ovo.omno.", ".omo..ovHo..omo.", ".oo..ovHwo..omo.", "....ovHwo....oo.", "...ovHwo........", "..ovHwo.........", ".ovHwo..........", "ovHwo...........", "oHwo............", ".oo.............", "................", "................"], "woodcutting": ["....oooooooo....", "...ooLLLLLloo...", "..ooLLlLLllloo..", "..oLLLLllllllo..", ".ooLLlllllllkoo.", ".oLLLllllllllko.", ".oLllllllllkkko.", ".oolllllllkkkoo.", "..ollllllkkkko..", "..oollkkkkkkoo..", "...ooowHwkooo...", "....okwHwoo.....", "....oowHwo......", "....oowHwoo.....", "....ovvHwvo.....", "....ooooooo....."], "farming": ["......oGo.......", "...o..oGgo.o....", "..oGo.oghooGo...", "..oGgooGgooGgo..", "..oghooghoogho..", "..oGgooGgooGgo..", "..oghooghoogho..", "..oGgo.lk.oGgo..", "..ogho.lk.ogho..", "...ol..lk..lo...", ".....kolkok.....", "....oHHHHHHo....", "....owwwwwwo....", ".....oklklo.....", ".....l.lk.k.....", "....k..lk..l...."], "combat": [".............ooo", "............oWWo", "...........oWMmo", "..........oWMmo.", ".........oWMmo..", "........oWMmo...", "...oo..oWMmo....", "...oGooWMmo.....", "....oGoMmo......", ".....oGgo.......", "....ovoggo......", "...ovHo.oGo.....", "..ovHo...oo.....", ".ovHo...........", "oGgo............", ".oo............."], "ranged": ["....oooo........", "...oHwwvo.......", "..oHwoo.oo......", "..owo....oEo....", ".oHo......oEo...", ".owo.......oEo..", ".owo........oEo.", ".oHoooooooooooGo", ".owo........oEo.", ".owo.......oEo..", ".oHo......oEo...", "..owo....oEo....", "..oHwoo.oo......", "...oHwwvo.......", "....oooo........", "................"], "magic": [".........oooo...", "........oobco...", ".......ooBooo...", ".......oBco.....", "......ooBcoo....", "......oBYbco....", ".....ooYEYco....", ".....oBbYbcoo...", "....ooBbbbbco...", "....oBbbbbbco...", "...ooBbbbbbcoo..", ".oooGGGGGGGGgooo", ".oBBbbbbbbbbbbbo", ".oocccccccccccoo", "..ooooooooooooo.", "................"], "fishing": ["................", "................", "......ooo.......", ".....oocoo......", "...ooocccoo..ooo", ".oooccccccooooco", ".oBEBBBBBBBBocco", "ooBoBBBBBBBBbbbo", "obbbbbbbbbbbbbbo", "oobbbbbbbbbbbbbo", ".oEEEEEEEEEEocco", ".oooEEEbEEooooco", "...oooocooo..ooo", "......ooo.......", "................", "................"], "slayer": ["................", "....oooooooo....", "...oEEEEEEEeo...", "..oEEEEEEEEeeo..", "..oEEEEEEEEeeo..", "..oEooEEEooeeo..", "..oEoqoEEoqofo..", "..oEoooEEoooeo..", "..oeEEEooEEeeo..", "...oeEEEEEEeo...", "....oeoeoeoo....", "....oEoEoEoo....", ".....ooooooo....", "................", "................", "................"], "cooking": [".....oooooo.....", "....ooEEEEoo....", "..oooEEEEEEooo..", "..oEEEEEEEEEEoo.", ".ooEEEEEEEEEEEo.", ".oEEEEEEEEEEeeo.", ".oEEEEEEEEeeeeo.", ".ooEEEEEeeeeeeo.", "..ooEEeooeeeeoo.", "...offffffffoo..", "...oEEeEEeEEo...", "...oEEeEEeEEo...", "...oeeeeeeeeo...", "...oooooooooo...", "................", "................"], "smithing": ["................", "................", "..ooooooooooooo.", "oooWWWWWWWWWWWoo", "oWWMMMMMMMMMMMmo", "oommMMMMMMMMMmno", ".ooonmmmmmmmnnoo", "...ooomMmmnoooo.", "....oomMmmnoo...", "...oomMMmmmnoo..", "..oomMMMmmmmnoo.", "..oWWWWWWWWWWMo.", "..oMMMMMMMMMMno.", "..onnnnnnnnnnno.", "..ooooooooooooo.", "................"], "crafting": ["................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "oHvwvwHHvwvwHHvo", "oHwHwHHHwHwHHHvo", "owvwvwwwvwvwwwvo", "oooooooooooooooo", "owHHwHHHHwHHwHwo", "ovooooooooooooHo", "ovo.oMo..oMo.oHo", "ovo.oWo..oHo.owo", "ovo.ono..owo.owo", "ovo.ooo..ooo.owo", "ovo..........owo", "ooo..........ooo", "................"], "agility": ["........oooo....", ".......ooSSoo...", ".......oSSSso...", ".......oSSSso...", "......ooossoo...", "..oooooBBBBoo...", "..oSoBBBBBBBooo.", "..ooSBBBBBBoBSo.", "...oooBBBBoooSo.", "....ooccccooooo.", "...ooccooccoo...", "..ooccooooccoo..", ".ooccoo..ooccoo.", ".ovvoo....oovvo.", ".oooo......oooo.", "................"], "nametag": ["................", "................", "................", "....oooooooooo..", "...oHHHHHHHHHHo.", "..oHHHHHHHHHHHwo", ".oHHooHHvvvvvHwo", "oHHo..oHHHHHHHwo", "oHHo..oHvvvHHHwo", ".oHHooHHHHHHHHwo", "..oHHHHHHHHHHHwo", "...owwwwwwwwwwo.", "....oooooooooo..", "................", "................", "................"], "chest": ["................", "................", ".oooooooooooooo.", "oHHHHHHHHHHHHHwo", "owHHHHHHHHHHHwvo", "owwwwwwGGwwwwwvo", "oooooooGgooooooo", "owHHHHHogoHHHwvo", "owHHHHHHHHHHHwvo", "owHHHHHHHHHHHwvo", "owwwwwwwwwwwwwvo", "ovvvvvvvvvvvvvvo", ".oooooooooooooo.", "................", "................", "................"], "party": ["................", "...ooo.....ooo..", "..oHHHo...oHHHo.", "..oHHHo...oHHHo.", "...ooo.....ooo..", "..ooooo...ooooo.", ".oBBBBBo.oRRRRRo", ".oBbbbBo.oRrrrRo", ".oBbbbBo.oRrrrRo", ".obbbbbo.orrrrro", "..oo.oo...oo.oo.", "..oco.oco.oqo.oq", "................", "................", "................", "................"], "chat": ["................", "................", ".oooooooooooooo.", "oEEEEEEEEEEEEEeo", "oEEffffffffEEEeo", "oEEEEEEEEEEEEEeo", "oEEffffffEEEEEeo", "oEEEEEEEEEEEEEeo", "oeeeeeeeeeeeeeeo", ".ooooooooooeeoo.", "..........oeo...", "..........oo....", "................", "................", "................", "................"], "flag": ["................", "...oo...........", "..oMMoooooooo...", "..oMoGGGGGGGGo..", "..oMoGgGGGGGGGo.", "..oMoGGGgGGGGgo.", "..oMoGGGGGGGgo..", "..oMoGgGGGGGGo..", "..oMoooooooooo..", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", "..oMo...........", ".ommmo..........", ".ooooo.........."], "wardrobe": ["................", "....oo....oo....", "...oPPoooPPPo...", "..oPPPPGGPPPPo..", ".oPPPPPGGPPPPPo.", "oPPpPPPGGPPPpPPo", "oPpoPPPGGPPPopPo", ".oo.oPPGGPPo.oo.", "....oPPGGPPo....", "....oPPPPPPo....", "....oPPPPPPo....", "....opPPPPpo....", "....oGGGGGGo....", "....oggggggo....", ".....oooooo.....", "................"], "materials": ["................", "................", "................", "............Y...", "...........YEY..", "............Y...", "....ooooooo.....", "...oGGGGGGGo....", "...oggggggho....", "...ooooooooo....", ".oooooooooooooo.", "oOOOOOOoWWWWWWWo", "oxxxxxxoMMMMMMno", "oooooooooooooooo", "................", "................"], "talents": ["...o.........o..", "..oPo.......opo.", ".oPPPo.....opppo", "..oPo...o...opo.", "...o...ogo...o..", "....o.ogYgo.o...", "...oGo.ogo.oGo..", "..oGYGo.o.oGYGo.", "...oGo..g..oGo..", "....o.g.g.g.o...", "......g.o.g.....", ".......oGo......", "......oGYGo.....", ".......oGo......", "........o.......", "................"], "dice": ["................", "..oooooooooooo..", ".oEEEEEEEEEEEEo.", ".oEppEEEEEEppeo.", ".oEppEEEEEEppeo.", ".oEEEEEEEEEEEeo.", ".oEEEEEppEEEEeo.", ".oEEEEEppEEEEeo.", ".oEEEEEEEEEEEeo.", ".oEppEEEEEEppeo.", ".oEppEEEEEEppeo.", ".oeeeeeeeeeeeeo.", ".offffffffffffo.", "..oooooooooooo..", "................", "................"], "reforge": ["....P......p....", "...pYp..P...P...", ".ooopoooooooo...", "oWWWWWWWWWWMMo..", "omMMMMMMMMMMmmoo", ".ommmmmmmmmmmmno", "..oonmmmmmnnoo..", "....onmPpmno....", ".....ommmno.....", ".....ommmno.....", "....onmmmmno....", "...ommmmmmmno...", "..oMMMMMMMMmmo..", "..ooooooooooooo.", "................", "................"]};
   function draw(canvas, icon) {
     const map = ICONS[icon]; if (!map) return;
     canvas.width = 18; canvas.height = 18;
@@ -1456,7 +1992,7 @@ footer p { margin: 0; }
         tries.forEach(o => o.setAttribute("aria-pressed", String(o === b)));
       });
     });
-    const D = [["flag", "Dragonslayer", "Fell the Ender Dragon"], ["chest", "the Unsealed", "Break all eight seals"],
+    const D = [["flag", "Dragonslayer", "Fell the Ender Dragon"], ["chest", "the Unsealed", "Break eight seals"],
       ["slayer", "Trailblazer", "First on the server to fell a boss"], ["combat", "Titanslayer", "Defeat every boss of the Titans"],
       ["agility", "the Maxed", "Reach 99 in every skill"], ["materials", "the Smith", "Forge a tool from every material"]];
     const txt = document.querySelector(".dt-txt"), toast = $("toast");
@@ -1493,30 +2029,219 @@ footer p { margin: 0; }
   })();
 
 
-  // the top bar: The Game's dropdown, the phone menu, and the section you're in underlined
+  // the top bar: the dropdowns, the phone menu, and the section you're in underlined
   (() => {
-    const bar = document.querySelector(".bar"), dd = bar.querySelector(".dd"), btn = bar.querySelector(".dd-btn"), menu = bar.querySelector(".menu-btn");
-    const setDD = open => { dd.classList.toggle("open", open); btn.setAttribute("aria-expanded", String(open)); };
+    const bar = document.querySelector(".bar"), menu = bar.querySelector(".menu-btn"), dds = [...bar.querySelectorAll(".dd")];
+    const setDD = (dd, open) => { dd.classList.toggle("open", open); dd.querySelector(".dd-btn").setAttribute("aria-expanded", String(open)); };
     const setMenu = open => { bar.classList.toggle("menu-open", open); menu.setAttribute("aria-expanded", String(open)); };
     const hover = matchMedia("(hover: hover) and (min-width: 641px)");
-    let shut;
-    dd.addEventListener("mouseenter", () => { if (hover.matches) { clearTimeout(shut); setDD(true); } });
-    dd.addEventListener("mouseleave", () => { if (hover.matches) shut = setTimeout(() => setDD(false), 160); });
-    btn.addEventListener("click", () => setDD(!dd.classList.contains("open")));
+    dds.forEach(dd => {
+      let shut;
+      dd.addEventListener("mouseenter", () => { if (!hover.matches) return; clearTimeout(shut); dds.forEach(o => setDD(o, o === dd)); });
+      dd.addEventListener("mouseleave", () => { if (hover.matches) shut = setTimeout(() => setDD(dd, false), 160); });
+      dd.querySelector(".dd-btn").addEventListener("click", () => { const open = !dd.classList.contains("open"); dds.forEach(o => setDD(o, o === dd && open)); });
+    });
     menu.addEventListener("click", () => setMenu(!bar.classList.contains("menu-open")));
-    document.addEventListener("click", e => { if (!dd.contains(e.target)) setDD(false); if (!bar.contains(e.target)) setMenu(false); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape") { setDD(false); setMenu(false); } });
+    document.addEventListener("click", e => { dds.forEach(dd => { if (!dd.contains(e.target)) setDD(dd, false); }); if (!bar.contains(e.target)) setMenu(false); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") { dds.forEach(dd => setDD(dd, false)); setMenu(false); } });
     const links = [...bar.querySelectorAll("nav a[href^='#']")];
-    links.forEach(a => a.addEventListener("click", () => { setDD(false); setMenu(false); }));
+    links.forEach(a => a.addEventListener("click", () => { dds.forEach(dd => setDD(dd, false)); setMenu(false); }));
     const mark = id => {
       links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + id));
-      dd.classList.toggle("on", !!dd.querySelector("a.on"));
+      dds.forEach(dd => dd.classList.toggle("on", !!dd.querySelector("a.on")));
     };
     const watch = [document.getElementById("top"), ...links.map(a => document.querySelector(a.getAttribute("href")))].filter(Boolean);
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) mark(e.target.id); }), { rootMargin: "-40% 0px -55% 0px" });
       watch.forEach(sec => io.observe(sec));
     }
+  })();
+
+  // seals: the one you pick says what its key takes, who guards it and what's behind it
+  (() => {
+    const box = document.getElementById("seal-detail"), bs = [...document.querySelectorAll(".seal-b")];
+    if (!box) return;
+    const S = [{"key": "copper", "title": "Seal of Copper", "tier": "I", "rec": ["4 × Flint", "Bone", "Fibre rope", "2 × Leather"], "tro": [], "guard": "The Mother Spider", "opens": "Copper in all its forms, and station tier II", "num": "I", "act": "Act I · The Shore", "c": "#f0955a", "mem": ["Salt", "You remember the smell of the sea, and a voice calling your name from a ship that went down."]}, {"key": "iron", "title": "Seal of Iron", "tier": "II", "rec": ["4 × Copper block", "Raw copper block", "2 × Lightning rod"], "tro": ["Dune Sentinel", "Overgrown Colossus", "Ancient Guardian", "the Ambusher", "an Ogre Brute"], "guard": "The Kobolediator", "opens": "Act II opens: the Iron Age, and station tier III", "num": "II", "act": "Act II · Iron", "c": "#e2e8f2", "mem": ["The Forge", "You remember a forge. Not Brannoc's: bigger, louder, a hundred anvils ringing at once."]}, {"key": "gold", "title": "Seal of Gold", "tier": "III", "rec": ["4 × Iron block", "Cauldron", "2 × Chain"], "tro": ["Ancient Guardian", "Dune Sentinel", "the Ogre Lord"], "guard": "The Wadjet", "opens": "The Gold Age: the deserts, the badlands and the ruins buried in them", "num": "III", "act": "Act II · Iron", "c": "#ffd04a", "mem": ["Gold Roofs", "You remember a city of gold roofs, and how quiet it was at noon, when everyone was working."]}, {"key": "diamond", "title": "Seal of Diamond", "tier": "III", "rec": ["4 × Gold block", "Clock", "2 × Diamond"], "tro": ["Krampus", "Nightmare Stalker", "Frostbitten Golem", "Cumulonimbus", "Ashlord", "Kobolediator", "Wadjet"], "guard": "The Nightmare Stalker", "opens": "The Diamond Age, enchanting, and station tier IV", "num": "IV", "act": "Act II · Iron", "c": "#6ff3ee", "mem": ["The Ring", "You remember cutting a diamond for a ring. You can't remember who it was for. You remember that it mattered."]}, {"key": "deep", "title": "Seal of the Deep", "tier": "IV", "rec": ["4 × Diamond", "Diamond block", "2 × Gold block"], "tro": ["the Kraken", "Harbinger", "Possessed Paladin", "Last of Deepslate", "Lord Pumpkinhead", "Ancient Remnant"], "guard": "The Supreme Bonescaller", "opens": "Act III opens: the Deep Dark and its sculk", "num": "V", "act": "Act III · The Deep", "c": "#2fc7b4", "mem": ["The Breaking", "You remember the ground opening."]}, {"key": "tides", "title": "Seal of the Tides", "tier": "IV", "rec": ["4 × Echo shard", "Sculk catalyst", "2 × Diamond"], "tro": ["Lifestealer", "Supreme Bonescaller", "Maledictus", "Scylla"], "guard": "Captain Cornelia", "opens": "The ocean's depths, the abyss and the drowned ships", "num": "VI", "act": "Act III · The Deep", "c": "#4f9dff", "mem": ["The Bells", "You remember the waves closing over the last tower, and its bells still ringing under the water."]}, {"key": "fire", "title": "Seal of Fire", "tier": "IV", "rec": ["4 × Obsidian", "Flint and steel", "2 × Gold block"], "tro": ["Coralssus", "Clawdian", "the Maw", "Captain Cornelia", "the Leviathan"], "guard": "The Lifestealer", "opens": "Act IV opens: the Nether", "num": "VII", "act": "Act IV · Fire", "c": "#ff6a2a", "mem": ["The Sealers", "You remember a ring of people round a fire that burned on nothing at all."]}, {"key": "ancient", "title": "Seal of the Ancients", "tier": "IV", "rec": ["4 × Blaze rod", "Quartz block", "2 × Ancient debris"], "tro": ["Netherite Monstrosity", "Lava Eater", "Skeletosaurus", "Withered Abomination", "Warped Fungussus", "Helvar"], "guard": "Krampus", "opens": "Netherite, the oldest ruins, and station tier V", "num": "VIII", "act": "Act IV · Fire", "c": "#e8476a", "mem": ["The Eldest", "You remember the eldest of the Sealers. She was already old when the world broke, and she was the first to hand over her key."]}, {"key": "eyes", "title": "Seal of the Eyes", "tier": "V", "rec": ["4 × Spider eye", "Lodestone", "2 × Blaze rod", "the twelve eyes, found"], "tro": ["Ignis", "an Ignited Revenant"], "guard": "Azazel", "opens": "The way to the End portal", "num": "IX", "act": "Act V · The End", "c": "#86f06a", "mem": ["Twelve", "You remember twelve eyes set in a ring, all of them open, all of them on you."]}, {"key": "end", "title": "Seal of the End", "tier": "V", "rec": ["4 × Obsidian", "Diamond block", "2 × Blaze rod"], "tro": ["Azazel", "Ignis"], "guard": "The Ender Guardian", "opens": "Act V opens: the End, the dragon, and what lies past it", "num": "X", "act": "Act V · The End", "c": "#c98cff", "mem": ["The Last Key", "You remember the last seal. You closed it yourself."]}];
+    const set = (id, t) => { document.getElementById(id).textContent = t; };
+    const chips = (id, xs) => { const ul = document.getElementById(id); ul.replaceChildren(...xs.map(x => { const li = document.createElement("li"); li.textContent = x; return li; })); };
+    let on = 5;
+    const show = (k, quiet) => {
+      const d = S[k]; on = k;
+      box.style.setProperty("--c", d.c);
+      document.getElementById("sd-key").src = "img/keys/" + d.key + ".png";
+      set("sd-num", d.num); set("sd-act", d.act); set("sd-title", d.title); set("sd-tier", "Forge tier " + d.tier);
+      chips("sd-recipe", d.rec); chips("sd-troph", d.tro); document.getElementById("sd-troph-row").hidden = !d.tro.length;
+      set("sd-guard", d.guard); set("sd-opens", d.opens);
+      bs.forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.k === k)));
+      if (!quiet) document.dispatchEvent(new CustomEvent("seal-pick", { detail: { k, num: d.num, title: d.title } }));
+      document.dispatchEvent(new CustomEvent("seal-memory", { detail: d.mem }));
+    };
+    bs.forEach(b => { b.addEventListener("click", () => show(+b.dataset.k)); b.addEventListener("mouseenter", () => show(+b.dataset.k)); });
+    document.addEventListener("seal-show", e => { if (on !== e.detail) show(e.detail, true); });
+    bs.forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.k === 5)));
+  })();
+
+  // side roads: the seal you pick says what its key takes, who guards it and what's behind it; the memory card says
+  // what any picked seal (main road or side) gives back
+  (() => {
+    const box = document.getElementById("road-detail"), bs = [...document.querySelectorAll(".road-b")];
+    const memT = document.getElementById("mem-t"), memX = document.getElementById("mem-x");
+    if (!box) return;
+    const R = {"mechanical": {"id": "mechanical", "road": "The Machine Road", "c": "#f2b04a", "title": "The Mechanical Age", "tier": "II", "rec": ["4 × Andesite", "Copper block", "Raw copper block", "2 × Copper ingot"], "tro": [], "after": "After Copper", "guard": "The Kobolediator", "opens": "Opens Create: shafts and cogs, water wheels and belts, and everything built on them.", "mem": ["Gears", "You remember the sound of a thousand gears turning, and that it once sounded like music to you."]}, "steam": {"id": "steam", "road": "The Machine Road", "c": "#f2b04a", "title": "The Steam Age", "tier": "III", "rec": ["4 × Copper block", "Fluid tank", "Blast furnace", "2 × Andesite alloy"], "tro": [], "after": "After Gold and the Mechanical Age", "guard": "The Wadjet", "opens": "Opens Modern Industrialization: bronze, steam and the first machines (after Create's processing).", "mem": ["Steam", "You remember steam in a cold morning, and boilers that never went out."]}, "electric": {"id": "electric", "road": "The Machine Road", "c": "#f2b04a", "title": "The Electric Age", "tier": "IV", "rec": ["4 × Steel ingot", "Redstone block", "Bronze machine casing", "2 × Diamond"], "tro": [], "after": "After the Steam Age and Diamond", "guard": "The Nightmare Stalker", "opens": "Opens electricity: MI's first electric machines and Create: Power Grid's generators, wires and motors.", "mem": ["Lightning", "You remember lights in every window of a city that had forgotten what night was."]}, "digital": {"id": "digital", "road": "The Machine Road", "c": "#f2b04a", "title": "The Digital Age", "tier": "IV", "rec": ["4 × Analog circuit", "Quartz block", "Netherite ingot", "2 × Redstone block"], "tro": [], "after": "After the Electric Age and the Ancients", "guard": "The Supreme Bonescaller", "opens": "Opens the ME network, HV industry and Create: Power Grid's electronics.", "mem": ["Thinking Machines", "You remember machines that thought faster than their makers, and how proud everyone was."]}, "atomic": {"id": "atomic", "road": "The Machine Road", "c": "#f2b04a", "title": "The Atomic Age", "tier": "V", "rec": ["4 × Electronic circuit", "Digital circuit", "Netherite ingot", "2 × End crystal"], "tro": [], "after": "After the Digital Age and the End", "guard": "Krampus", "opens": "Opens nuclear power and EV industry, quantum networks and MEGA storage.", "mem": ["The Sun in a Box", "You remember a light brighter than noon, deep underground, and the silence after it."]}, "quantum": {"id": "quantum", "road": "The Machine Road", "c": "#f2b04a", "title": "The Quantum Age", "tier": "V", "rec": ["4 × Uranium fuel rod", "Plutonium ingot", "Dragon's breath", "2 × Digital circuit"], "tro": [], "after": "After the Atomic Age", "guard": "Azazel", "opens": "Opens fusion, superconductors and quantum gear, the multi processing array and the quantum computer.", "mem": ["Everywhere at Once", "You remember being in two places at once. It was the last thing the old world learned."]}, "apprentice": {"id": "apprentice", "road": "The Arcane Road", "c": "#b58cff", "title": "The Apprentice", "tier": "III", "rec": ["4 × Amethyst shard", "Diamond", "Amethyst block", "2 × Iron ingot"], "tro": [], "after": "After Iron", "guard": "The Archevoker", "opens": "Opens Iron's Spells 'n Spellbooks: spellbooks, scrolls and the first schools of magic.", "mem": ["Chalk", "You remember chalk circles on a tower floor, and someone patient showing you where your hands should go."]}, "battlemage": {"id": "battlemage", "road": "The Arcane Road", "c": "#b58cff", "title": "The Battlemage", "tier": "IV", "rec": ["4 × Arcane essence", "Enchanting table", "2 × Gold ingot"], "tro": ["the Dead King"], "after": "After the Apprentice and Diamond", "guard": "The Dead King", "opens": "Opens the battlemage's arts: spells to fight with, and the gear to cast them in.", "mem": ["The War of Words", "You remember a war fought with words that burned, and how few came back from it."]}, "arcana": {"id": "arcana", "road": "The Arcane Road", "c": "#b58cff", "title": "The Arcana", "tier": "IV", "rec": ["4 × Arcane essence", "Lapis block", "2 × Diamond"], "tro": ["Last of Deepslate", "Maledictus"], "after": "After the Battlemage and the Deep", "guard": "The Pyromancer", "opens": "Opens the deeper arcana: inscriptions, runes and the strongest schools.", "mem": ["Runes", "You remember carving runes into a seal by candlelight. They are the same runes on the Sealgate."]}, "artifice": {"id": "artifice", "road": "The Arcane Road", "c": "#b58cff", "title": "The Artifice", "tier": "IV", "rec": ["4 × Arcane essence", "Clock", "2 × Quartz block"], "tro": ["the Echo of Tyros"], "after": "After the Arcana and Fire", "guard": "The Echo of Tyros", "opens": "Opens Iron's Arms 'n Artifice: clockwork, and the strange things built with it.", "mem": ["Clockwork", "You remember a clockwork bird that sang the same song for a hundred years."]}, "archmage": {"id": "archmage", "road": "The Arcane Road", "c": "#b58cff", "title": "The Archmage", "tier": "V", "rec": ["4 × Dragon's breath", "End crystal", "Netherite ingot", "2 × Ender pearl"], "tro": [], "after": "After the Artifice and the End", "guard": "The Dead King", "opens": "Opens the exotic artifice, the rarest of the Sealers' craft.", "mem": ["The Last Lesson", "You remember your teacher's last lesson: that the strongest spell is the one you choose not to cast."]}, "initiate": {"id": "initiate", "road": "The Classes Road", "c": "#ff5a6a", "title": "The Initiate", "tier": "II", "rec": ["4 × Leather", "Amethyst shard", "Bow", "2 × Copper ingot"], "tro": [], "after": "After Copper", "guard": "The Kobolediator", "opens": "Opens the RPG classes: rogues and warriors, paladins and priests, archers, berserkers, bards and forcemasters.", "mem": ["The Drill Yard", "You remember a drill yard at dawn, and a sergeant who never once said well done."]}, "specialist": {"id": "specialist", "road": "The Classes Road", "c": "#ff5a6a", "title": "The Specialist", "tier": "III", "rec": ["4 × Iron ingot", "Diamond", "Iron block", "2 × Leather"], "tro": [], "after": "After the Initiate and Iron", "guard": "The Possessed Paladin", "opens": "Opens each class's specialisations.", "mem": ["Colours", "You remember choosing your colours, and the order that gave them to you."]}, "veteran": {"id": "veteran", "road": "The Classes Road", "c": "#ff5a6a", "title": "The Veteran", "tier": "IV", "rec": ["4 × Iron block", "Obsidian", "2 × Gold ingot"], "tro": ["Possessed Paladin"], "after": "After the Specialist and Diamond", "guard": "The Underworld Knight", "opens": "Opens the veteran ranks.", "mem": ["Scars", "You remember counting your scars, and knowing where every one of them came from."]}, "legend": {"id": "legend", "road": "The Classes Road", "c": "#ff5a6a", "title": "The Legend", "tier": "IV", "rec": ["4 × Gold block", "Respawn anchor", "2 × Blaze rod"], "tro": ["Withered Abomination", "Netherite Monstrosity"], "after": "After the Veteran and Fire", "guard": "The Sacred Pontiff", "opens": "Opens the greater and superior relics, the treasure jewellery and the legendary bows.", "mem": ["The Songs", "You remember the songs they sang about you, and that most of them were wrong."]}, "oathbound": {"id": "oathbound", "road": "The Relic Road", "c": "#ffe08a", "title": "The Oath", "tier": "III", "rec": ["4 × Iron ingot", "Diamond", "Bone block", "2 × Chain"], "tro": [], "after": "After Iron", "guard": "The Dune Sentinel", "opens": "Opens the Oathbound Relics.", "mem": ["The Oath", "You remember swearing an oath on a relic, and that it swore one back."]}, "abyss": {"id": "abyss", "road": "The Relic Road", "c": "#ffe08a", "title": "The Abyss", "tier": "IV", "rec": ["4 × Echo shard", "Sculk catalyst", "2 × Iron block"], "tro": ["Last of Deepslate", "Lifestealer"], "after": "After the Oath and the Deep", "guard": "The Last of Deepslate", "opens": "Opens the Oathbound relics of the deep.", "mem": ["Pressure", "You remember the weight of the water above you, and a light that wasn't yours."]}, "inferno": {"id": "inferno", "road": "The Relic Road", "c": "#ffe08a", "title": "The Inferno", "tier": "IV", "rec": ["4 × Blaze rod", "Crying obsidian", "2 × Gold block"], "tro": ["Lava Eater", "Netherite Monstrosity"], "after": "After the Abyss and Fire", "guard": "The Netherite Monstrosity", "opens": "Opens the Oathbound relics of the Nether and the relics of Olympus.", "mem": ["Old Gods", "You remember gods who asked for nothing, and how that frightened everyone more."]}, "void": {"id": "void", "road": "The Relic Road", "c": "#ffe08a", "title": "The Void", "tier": "V", "rec": ["4 × Ender pearl", "Netherite ingot", "2 × End crystal"], "tro": ["Shulker Mimic", "Chorusent"], "after": "After the Inferno and the End", "guard": "The Obliterator", "opens": "Opens the Oathbound relics of the void and Enderitium.", "mem": ["Nothing", "You remember standing at the edge of nothing, and nothing looking back."]}};
+    const set = (id, t) => { document.getElementById(id).textContent = t; };
+    const chips = (id, xs) => document.getElementById(id).replaceChildren(...xs.map(x => { const li = document.createElement("li"); li.textContent = x; return li; }));
+    const mem = m => { if (memT) { memT.textContent = m[0]; memX.textContent = m[1]; } };
+    const show = id => {
+      const d = R[id];
+      box.style.setProperty("--c", d.c);
+      set("rd-road", d.road); set("rd-title", d.title); set("rd-after", d.after); set("rd-tier", "Forge tier " + d.tier);
+      chips("rd-recipe", d.rec); chips("rd-troph", d.tro); document.getElementById("rd-troph-row").hidden = !d.tro.length;
+      set("rd-guard", d.guard); set("rd-opens", d.opens);
+      bs.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === id)));
+      mem(d.mem);
+    };
+    bs.forEach(b => { b.addEventListener("click", () => show(b.dataset.s)); b.addEventListener("mouseenter", () => show(b.dataset.s)); });
+    document.addEventListener("seal-memory", e => mem(e.detail));
+    show("mechanical"); mem(["The Bells", "You remember the waves closing over the last tower, and its bells still ringing under the water."]);
+  })();
+
+  // the Sealgate (its model in game, rendered): its four moments in turn while it's on screen, each a clip played from
+  // its start (a fresh object URL restarts an animated image); a moment's button plays that one and waits a while
+  (() => {
+    const gate = document.getElementById("sgate"), cap = document.getElementById("sg-cap");
+    if (!gate) return;
+    const btns = [...gate.querySelectorAll(".sg-moments button")], steps = [...document.querySelectorAll(".seal-side .step")];
+    const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const M = {
+      idle: ["Its ten stones are the main road, I to X; the pillars' grooves are the side roads. Each lights for the seals you've broken: this gate's at V, with the Tides' key.", 1, 5200],
+      key: ["Your key goes into the lock and turns. The seams blaze, and the four stone doors swing open.", 2, 2600],
+      open: ["Behind them a storm of light spins, and the seal's guardian steps out to meet you.", 3, 3400],
+      break: ["The guardian falls. The stones spin, the doors close, and the seal's number lights for good: VI, the Tides.", 3, 4200]
+    };
+    const img = document.getElementById("sg-img"), urls = {};
+    const clip = p => {
+      img.classList.toggle("drift", p === "idle");
+      if (calm) return;
+      if (p === "idle") { if (img.dataset.u) URL.revokeObjectURL(img.dataset.u); img.dataset.u = ""; img.src = still; return; }
+      const go = u => { if (img.dataset.u) URL.revokeObjectURL(img.dataset.u); const o = URL.createObjectURL(u); img.dataset.u = o; img.src = o; };
+      if (urls[p]) go(urls[p]);
+      else fetch("img/sealgate/" + p + ".webp").then(r => r.ok ? r.blob() : Promise.reject()).then(b => { urls[p] = b; go(b); }).catch(() => { img.src = "img/sealgate/" + p + ".webp"; });
+    };
+    const order = ["idle", "key", "open", "break"];
+    let i = 0, timer = 0, seen = false, held = 0, picked = 5, still = "img/sealgate/still.webp";
+    const show = (p, first) => {
+      gate.classList.remove("phase-key", "phase-open", "phase-break");
+      void gate.getBoundingClientRect(); // so the same moment plays again from its start
+      if (p !== "idle") gate.classList.add("phase-" + p);
+      if (!first) clip(p);
+      cap.textContent = M[p][0];
+      btns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.p === p)));
+      steps.forEach(s => s.classList.toggle("on", +s.dataset.step === M[p][1]));
+    };
+    const next = () => {
+      clearTimeout(timer);
+      if (!seen || calm || picked !== 5) return;
+      const p = order[i];
+      show(p);
+      timer = setTimeout(() => { i = (i + 1) % order.length; next(); }, M[p][2] + (held > Date.now() ? held - Date.now() : 0));
+    };
+    // a seal picked above: the gate as you come to it with that key (the seals before it lit); the moments play the Tides
+    document.addEventListener("seal-pick", e => {
+      const k = e.detail.k;
+      if (k === picked) return;
+      picked = k;
+      if (k === 5) { still = "img/sealgate/still.webp"; i = 0; held = 0; next(); if (!seen || calm) show("idle"); return; }
+      clearTimeout(timer);
+      still = "img/sealgate/seal" + k + ".webp";
+      img.classList.add("drift");
+      if (img.dataset.u) URL.revokeObjectURL(img.dataset.u); img.dataset.u = ""; img.src = still;
+      cap.textContent = (k ? "The gate as you bring it the key to " + e.detail.num + ": " + (k > 1 ? "I to " : "") + ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"][k] + " lit." : "The gate as you come to it with your first key: nothing lit yet.") + " The moments below play the Tides.";
+      btns.forEach(b => b.setAttribute("aria-pressed", "false"));
+      steps.forEach(s => s.classList.toggle("on", s.dataset.step === "1"));
+    });
+    btns.forEach(b => b.addEventListener("click", () => {
+      if (picked !== 5) { picked = 5; still = "img/sealgate/still.webp"; document.dispatchEvent(new CustomEvent("seal-show", { detail: 5 })); }
+      i = order.indexOf(b.dataset.p);
+      clearTimeout(timer);
+      show(b.dataset.p);
+      held = Date.now() + 6000; // let it be watched, then carry on round
+      timer = setTimeout(() => { i = (i + 1) % order.length; next(); }, M[b.dataset.p][2] + 6000);
+    }));
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(es => es.forEach(e => {
+        const was = seen; seen = e.isIntersecting;
+        if (seen && !was) next(); else if (!seen) clearTimeout(timer);
+      }), { threshold: .35 }).observe(gate);
+    }
+    show("idle", true);
+    img.classList.add("drift");
+    if (!calm) ["key", "open", "break"].forEach(p => { // fetched once it's near, so each moment starts at once
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fetch("img/sealgate/" + p + ".webp").then(r => r.blob()).then(b => { urls[p] = b; }).catch(() => {}); } }, { rootMargin: "600px" });
+      io.observe(gate);
+    });
+    const pre = new IntersectionObserver(es => { // and the seals' stills, so picking one swaps at once
+      if (!es.some(e => e.isIntersecting)) return;
+      pre.disconnect();
+      for (let k = 0; k < 10; k++) if (k !== 5) new Image().src = "img/sealgate/seal" + k + ".webp";
+    }, { rootMargin: "600px" });
+    pre.observe(gate);
+  })();
+
+  // gear rarity: an Iron Chestplate at the tier you pick
+  (() => {
+    const T = [["Common", "#ffffff", 6.0, 240, 0, [], 0], ["Uncommon", "#66ff22", 6.6, 264, 0, [], 0], ["Rare", "#2e7bff", 7.2, 300, 3, ["Vital"], 0], ["Epic", "#c23bff", 8.1, 336, 6, ["Hardened"], 1], ["Legendary", "#ffd21e", 9.0, 384, 10, ["Vital", "Fleet"], 0], ["Mythic", "#ff2a2a", 10.5, 480, 15, ["Vital", "Hardened", "Lucky"], 1]];
+    const tt = document.getElementById("tt"), btns = [...document.querySelectorAll(".rt")];
+    if (!tt) return;
+    const set = (id, t) => { document.getElementById(id).textContent = t; };
+    const show = k => {
+      const [name, col, arm, dur, req, bon, tough] = T[k];
+      tt.style.setProperty("--c", col);
+      set("tt-rib", "★ " + name);
+      set("tt-bon", bon.join(" · "));
+      set("tt-arm", "+" + arm.toFixed(1).replace(/\.0$/, "") + " Armor");
+      const ext = [];
+      if (bon.includes("Vital")) ext.push("+2 Max Health");
+      if (tough) ext.push("+" + tough + " Armor Toughness");
+      if (bon.includes("Fleet")) ext.push("+4% Speed");
+      if (bon.includes("Lucky")) ext.push("+1 Luck");
+      set("tt-ext", ext.join("\n"));
+      document.getElementById("tt-ext").style.whiteSpace = "pre-line";
+      set("tt-req", "Requires Combat " + (10 + req));
+      set("tt-dur", "Durability: " + dur + " / " + dur);
+      btns.forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.k === k)));
+    };
+    btns.forEach(b => b.addEventListener("click", () => show(+b.dataset.k)));
+    show(3);
+  })();
+
+  // Fortune's Dice: throw one
+  (() => {
+    const btn = document.getElementById("dice-btn"), die = document.getElementById("die");
+    if (!btn) return;
+    const TIERS = [["Common", "#ffffff", 40], ["Uncommon", "#66ff22", 28], ["Rare", "#2e7bff", 18], ["Epic", "#c23bff", 9], ["Legendary", "#ffd21e", 4], ["Mythic", "#ff2a2a", 1]];
+    const FACES = [
+      [["Pocket Change", "5 to 15 coins."], ["A Lesson", "XP in a random skill."], ["Picnic", "Bread and apples for the road."], ["The Die Cackles", "Nothing at all. A witch laughs somewhere."], ["Flurry of Feathers", "Five chickens."]],
+      [["A Full Purse", "20 to 40 coins."], ["Insight", "A good chunk of XP in a random skill."], ["Blessing", "Regeneration, and Luck for two minutes."], ["Ambush!", "Three zombies. Good luck."]],
+      [["Lamp of Knowledge", "An XP lamp."], ["Bounty", "40 Slayer points."], ["Coffer", "60 to 100 coins."], ["Hex", "Slowness and Weakness. Ouch."]],
+      [["Twin Lamps", "Two XP lamps."], ["Blood Money", "120 Slayer points."], ["Tempered", "The gear in your hand goes up a tier."], ["Fortune's Stride", "Haste and Speed for three minutes."]],
+      [["Companion", "A skill pet you've never had."], ["Lamplighter", "Four XP lamps."], ["Jackpot", "250 coins."]],
+      [["Mythic Touch", "The gear in your hand turns Mythic."]]];
+    const tier = document.getElementById("dice-tier"), face = document.getElementById("dice-face"), what = document.getElementById("dice-what");
+    let busy = false;
+    btn.addEventListener("click", () => {
+      if (busy) return; busy = true;
+      let r = Math.random() * 100, k = 0;
+      while (r >= TIERS[k][2]) { r -= TIERS[k][2]; k++; }
+      const f = FACES[k][Math.floor(Math.random() * FACES[k].length)];
+      die.classList.remove("roll"); void die.offsetWidth; die.classList.add("roll");
+      tier.textContent = "…"; face.textContent = "Tumbling…"; what.textContent = "";
+      setTimeout(() => {
+        tier.textContent = "★ " + TIERS[k][0]; tier.style.setProperty("--tc", TIERS[k][1]);
+        die.style.setProperty("--c", TIERS[k][1]);
+        face.textContent = f[0]; what.textContent = f[1];
+        busy = false;
+      }, 650);
+    });
   })();
 
   // copy the server address (clipboard where allowed; otherwise select it for the viewer)
